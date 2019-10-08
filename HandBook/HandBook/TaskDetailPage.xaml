@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HandBook.TaskDetailPage"
+             xmlns:local1="clr-namespace:HandBook.Extensions">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save"  Order="Secondary"/>
+        <ToolbarItem Text="Delete" IsDestructive="True" Order="Secondary"/>
+    </ContentPage.ToolbarItems>
+    <TableView HasUnevenRows="True" >
+        <TableRoot>
+            <TableSection Title="Task Name" >
+                <EntryCell Label="Title" x:Name="txtTitle" Text="{Binding Title}"  Placeholder="(e.g Go Shopping)" />
+                <SwitchCell Text="Notify me" x:Name="txtNotify" On="{Binding Notify}"/>
+            </TableSection>
+            <TableSection Title="Duration">
+                <local1:DateCell Label="Start" x:Name="txtStart" Date="{Binding Start}"/>
+                <local1:DateCell Label="End" x:Name="txtEnd" Date="{Binding End}"/>
+            </TableSection>
+            <TableSection  Title="Full Description">
+                <ViewCell>
+                    <ScrollView>
+                        <StackLayout VerticalOptions="FillAndExpand" HeightRequest="200" >
+                            <Editor x:Name="txtDetail" Text="{Binding Detail}" VerticalOptions="FillAndExpand" />
+                        </StackLayout>
+                    </ScrollView>
+                </ViewCell>
+            </TableSection>
+            <TableSection>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Button Text="Save" x:Name="btnSave" Clicked="BtnSave_Clicked"/>
+                        <Button Text="Delete" x:Name="btnDelete" Clicked="btnDelete_Clicked"/>
+                    </StackLayout>
+                </ViewCell>
+            </TableSection>
+        </TableRoot>
+    </TableView>
+</ContentPage>
