@@ -27,10 +27,14 @@
                 </ViewCell>
             </TableSection>
             <TableSection>
-                <ViewCell>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                        <Button Text="Save" x:Name="btnSave" Clicked="BtnSave_Clicked"/>
-                        <Button Text="Delete" x:Name="btnDelete" Clicked="btnDelete_Clicked"/>
+                <ViewCell >
+                    <StackLayout Orientation="Horizontal" Margin="10">
+                        <Frame HasShadow="True" CornerRadius="10" BackgroundColor="{StaticResource pinkColor}" Padding="0" HorizontalOptions="StartAndExpand">
+                            <Button Text="Save" x:Name="btnSave" BackgroundColor="Transparent" Clicked="BtnSave_Clicked" TextColor="{StaticResource whiteColor}" />
+                        </Frame>
+                        <Frame HasShadow="True" CornerRadius="10" Padding="0" BackgroundColor="{StaticResource BlueColor}" HorizontalOptions="End" >
+                            <Button Text="Delete" Clicked="btnDelete_Clicked" BackgroundColor="Transparent" TextColor="{StaticResource whiteColor}" />
+                        </Frame>
                     </StackLayout>
                 </ViewCell>
             </TableSection>

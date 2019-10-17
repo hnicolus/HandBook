@@ -5,17 +5,18 @@ using System.Text;
 
 namespace HandBook.Models
 {
-    public class Note
+    public class Note 
     {
 
        [PrimaryKey,AutoIncrement]
        public int Id { get; set; }
 
        [MaxLength(30)]
-       public string title { get; set; }
+       public string Title { get; set; }
 
-       public string body { get; set; } 
+        public DateTime Date_pub { get; set; }
+       public string Body { get; set; } 
 
-       public bool isFavourite { get; set; }
+       public bool Islocked { get; set; }
     }
 }

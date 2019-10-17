@@ -12,13 +12,13 @@
                 <Frame>
                     <StackLayout   >
                         <Label Text="Title" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start"/>
-                        <Entry x:Name="txtTitle" Text="{Binding Title}" Placeholder="Title"  VerticalOptions="Start"/>
+                        <Entry x:Name="txtTitle" Text="{Binding Title}" Placeholder="Title" Completed="OnChange"  VerticalOptions="Start"/>
                     </StackLayout>
                 </Frame>
                 <Frame>
                     <StackLayout>
                         <Label Text="Genre" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start"/>
-                        <Entry x:Name="txtGenre" Text="{Binding Genre}" Placeholder="Genre"/>
+                        <Entry x:Name="txtGenre" Completed="OnChange" Text="{Binding Genre}" Placeholder="Genre"/>
                     </StackLayout>
                 </Frame>
                 <Frame VerticalOptions="FillAndExpand" HasShadow="True"  HeightRequest="150">

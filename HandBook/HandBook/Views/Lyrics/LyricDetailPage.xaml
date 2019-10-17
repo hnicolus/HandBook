@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HandBook.LyricDetailPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="btnDelete" Text="Delete" Clicked="BtnDelete_Clicked"/>
+        <ToolbarItem Text="Edit"  x:Name="btnEdit" Clicked="BtnEdit_Clicked"/>
+        <ToolbarItem Text="Lock"  x:Name="btnLock" Clicked="BtnLock_Clicked" Order="Secondary"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="10">
+                <StackLayout>
+                    <Label Text="Title :" FontAttributes="Bold"  />
+                    <Label x:Name="txtTitle" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Chorus :" FontAttributes="Bold"  />
+                    <Label x:Name="txtChorus" />
+                </StackLayout>
+
+                <StackLayout>
+
+                    <Label Text="Verse :" FontAttributes="Bold"  />
+                    <Label x:Name="txtLyrics"/>
+                </StackLayout>
+            </StackLayout>
+
+        </ScrollView>
+       
+    </ContentPage.Content>
+</ContentPage>

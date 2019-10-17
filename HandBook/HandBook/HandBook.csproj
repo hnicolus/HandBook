@@ -2,6 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <ApplicationIcon />
+    <Win32Resource></Win32Resource>
+    <Authors>Nicolas Maluleke</Authors>
+    <Description>Are you a writer, Musician, student 
+or idealist, well HandBook is the 
+tool you have been lacking, say goodbye
+to the old boring traditional note apps
+and Say hello to 
+a more beautiful and well
+organized text Editor</Description>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -10,57 +21,69 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
-    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.302-beta" />
+    <PackageReference Include="Xamarin.Forms" Version="4.3.0.851321-pre3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="LyricsPage.xaml.cs">
+    <Compile Update="Views\Lyrics\LyricsPage.xaml.cs">
       <DependentUpon>LyricsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="PersonalNotePage.xaml.cs">
+    <Compile Update="Views\Notes\PersonalNotePage.xaml.cs">
       <DependentUpon>PersonalNotePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="AddTaskPage.xaml">
+    <EmbeddedResource Update="Views\About\AboutPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="EditLyricPage.xaml">
+    <EmbeddedResource Update="Views\Lock\LockScreenPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Lock\NewPasswordPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\SettingsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Tasks\AddTaskPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Lyrics\EditLyricPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Extensions\DateCell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="LyricDetailPage.xaml">
+    <EmbeddedResource Update="Views\Lyrics\LyricDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="LyricsPage.xaml">
+    <EmbeddedResource Update="Views\Lyrics\LyricsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="HomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="IntroductionPage.xaml">
+    <EmbeddedResource Update="Views\WalkThrough\IntroductionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="NewNotesPage.xaml">
+    <EmbeddedResource Update="Views\Notes\NewNotesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="NoteDetailPage.xaml">
+    <EmbeddedResource Update="Views\Notes\NoteDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="PersonalNotePage.xaml">
+    <EmbeddedResource Update="Views\Notes\PersonalNotePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="SplashPage.xaml">
+    <EmbeddedResource Update="Views\WalkThrough\SplashPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="TaskDetailPage.xaml">
+    <EmbeddedResource Update="Views\Tasks\TaskDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="ToDoPage.xaml">
+    <EmbeddedResource Update="Views\Tasks\ToDoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

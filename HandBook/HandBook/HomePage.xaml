@@ -6,13 +6,12 @@
             xmlns:local="clr-namespace:HandBook">
 
     <TabbedPage.ToolbarItems>
-        <ToolbarItem x:Name="btnAdd" Text="Add Notes" Clicked="BtnAdd_Clicked"  Order="Secondary"/>
-        <ToolbarItem x:Name="btnAddLyrics" Text="Add Lyrics"   Order="Secondary"/>
-        <ToolbarItem x:Name="btnAddTask" Text="Add Task" Clicked="BtnAddTask_Clicked" Order="Secondary"/>
-        <ToolbarItem x:Name="btnSettings" Text="Settings" Order="Secondary"/>
-        <ToolbarItem x:Name="btnAbout" Text="About Us" Order="Secondary"/>
-    </TabbedPage.ToolbarItems>
 
+        <ToolbarItem x:Name="btnShare" Text="Share App" Clicked="BtnShare_Clicked" Order="Secondary"/>
+        <ToolbarItem x:Name="btnSettings" Text="Settings" Clicked="BtnSettings_Clicked" Order="Secondary"/>
+        <ToolbarItem x:Name="btnAbout" Clicked="BtnAbout_Clicked" Text="About Us" Order="Secondary"/>
+    </TabbedPage.ToolbarItems>
+   
     <local:PersonalNotePage Title="Personal Notes" Icon="personalNotes.png"/>
     <local:LyricsPage Title="Music Lyrics" Icon="musicLyrics.png"/>
     <local:ToDoPage Title="ToDo List" Icon="toDoList.png" />

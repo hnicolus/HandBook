@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HandBook.NoteDetailPage" BackgroundImage="background.png" >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Edit" x:Name="btnSave" Clicked="BtnEdit_Clicked" />
+        <ToolbarItem Text="Delete" x:Name="btnDelete" Clicked="BtnDelete_Clicked" IsDestructive="True" />
+        <ToolbarItem Text="Copy All" x:Name="btnCp"  Order="Secondary"/>
+        <ToolbarItem Text="Share" x:Name="btnShare" Order="Secondary" />
+        <ToolbarItem Text="Style Settings" x:Name="btnStyle" Order="Secondary" />
+        <ToolbarItem Text="Save as File" x:Name="btnFile" Order="Secondary" />
+        <ToolbarItem Text="Print" x:Name="btnPrint" Clicked="BtnPrint_Clicked" Order="Secondary" />
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <StackLayout Spacing="0">
+
+            <Frame HasShadow="False"  CornerRadius="0" Padding="10">
+                <Label x:Name="txtTitle" VerticalOptions="FillAndExpand" 
+                       HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center"  
+                       FontAttributes="Bold" FontSize="Large"   />
+            </Frame>
+            <Frame HasShadow="False" Padding="0"  CornerRadius="0" VerticalOptions="FillAndExpand">
+
+                <StackLayout>
+                    <Label x:Name="txtNewNote" Margin="10"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+            </Frame>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

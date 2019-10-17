@@ -17,14 +17,29 @@ namespace HandBook
 			InitializeComponent ();
 		}
 
-        async private void BtnAdd_Clicked(object sender, EventArgs e)
-        {
-           await Navigation.PushAsync(new NewNotesPage());
-        }
+		async private void BtnAdd_Clicked(object sender, EventArgs e)
+		{
+		   await Navigation.PushAsync(new NewNotesPage());
+		}
 
-        async private void BtnAddTask_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new AddTaskPage());
-        }
-    }
+		async private void BtnAddTask_Clicked(object sender, EventArgs e)
+		{
+			await Navigation.PushAsync(new AddTaskPage());
+		}
+
+		async private void BtnAbout_Clicked(object sender, EventArgs e)
+		{
+			await Navigation.PushModalAsync(new Views.About.AboutPage());
+		}
+
+		private void BtnShare_Clicked(object sender, EventArgs e)
+		{
+
+		}
+
+		async private void BtnSettings_Clicked(object sender, EventArgs e)
+		{
+			await Navigation.PushAsync(new Views.Settings.SettingsPage());
+		}
+	}
 }

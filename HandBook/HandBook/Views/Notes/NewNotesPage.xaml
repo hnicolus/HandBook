@@ -10,13 +10,15 @@
         <Frame HasShadow="True" CornerRadius="0" BackgroundColor="{StaticResource lightestBlueColor}" Padding="10">
             <StackLayout Orientation="Horizontal" >
                 <Label Text="Title :" FontAttributes="Bold" FontSize="Large" VerticalTextAlignment="Center"/>
-                <Entry x:Name="txtTitle" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" MaxLength="30"   />
+                <Entry x:Name="txtTitle" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
+                       MaxLength="30"  />
             </StackLayout>
         </Frame>
         <Frame  CornerRadius="0" BackgroundColor="{StaticResource lightBlueColor}" VerticalOptions="FillAndExpand">
             <ScrollView>
                 <StackLayout>
-                    <Editor x:Name="txtNewNote" Placeholder=" Details go here"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <Editor x:Name="txtNewNote" Placeholder=" Details go here"  VerticalOptions="FillAndExpand" 
+                            HorizontalOptions="FillAndExpand"   />
                 </StackLayout>
             </ScrollView>
         </Frame>

@@ -9,13 +9,13 @@ using Xamarin.Forms.Xaml;
 
 namespace HandBook
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SplashPage : ContentPage
-	{
-		public SplashPage ()
-		{
-			InitializeComponent ();
-		}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class SplashPage : ContentPage
+    {
+        public SplashPage ()
+        {
+            InitializeComponent ();
+        }
 
         async private void Button_Clicked(object sender, EventArgs e)
         {

@@ -11,27 +11,47 @@ using Xamarin.Forms.Xaml;
 
 namespace HandBook
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class EditLyricPage : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class EditLyricPage : ContentPage
+    {
         Lyric selectedLyric;
-		public EditLyricPage ( Lyric selectedLyric)
-		{
-			InitializeComponent ();
+        private const string titleKey = "Title";
+        private const string chorusKey = "Chorus";
+        private const string VerseKey = "Verse";
+        public EditLyricPage(Lyric selectedLyric)
+        {
+            InitializeComponent();
             this.selectedLyric = selectedLyric;
             BindingContext = selectedLyric;
-		}
+        }
 
         public EditLyricPage()
         {
             InitializeComponent();
-        }
 
-    async private void BtnDelete_Clicked(object sender, EventArgs e)
+            //tmpload();
+
+        }
+        private void tmpload()
         {
-            selectedLyric.Title = txtTitle.Text;
-            selectedLyric.Chorus = txtChorus.Text;
-            selectedLyric.Verse = txtChorus.Text;
+            var prop = Application.Current as App;
+            if (prop.Properties.ContainsKey(titleKey))
+            {
+                txtTitle.Text = prop.Properties[titleKey].ToString();
+            }
+            if (prop.Properties.ContainsKey(chorusKey))
+            {
+                txtChorus.Text = prop.Properties[chorusKey].ToString();
+            }
+            if (prop.Properties.ContainsKey(VerseKey))
+            {
+                txtVerse.Text = prop.Properties[VerseKey].ToString();
+            }
+
+        }
+        async private void BtnDelete_Clicked(object sender, EventArgs e)
+        {
+       
             var response = await DisplayAlert("Warning", "Are you sure you want to Delete this?", "Yes", "No");
 
             if (response)
@@ -61,12 +81,12 @@ namespace HandBook
             }
         }
 
-      
-    async private void BtnUpdate_Clicked(object sender, EventArgs e)
-    {
-        
 
-        if(selectedLyric != null)
+        async private void BtnUpdate_Clicked(object sender, EventArgs e)
+        {
+
+
+            if (selectedLyric != null)
             {
                 using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
                 {
@@ -75,11 +95,11 @@ namespace HandBook
 
                     if (rows > 0)
                     {
-                        await DisplayAlert("Success", "Lyrics have been successfully Deleted", "Ok");
+                        await DisplayAlert("Success", "Lyrics have been successfully Updated", "Ok");
                     }
                     else
                     {
-                        await DisplayAlert("Failed", "Lyrics have Failed to be Deleted", "Ok");
+                        await DisplayAlert("Failed", "Lyrics have Failed to be updated", "Ok");
                     };
                 }
             }
@@ -88,26 +108,47 @@ namespace HandBook
                 Lyric lyric = new Lyric()
                 {
                     Title = txtTitle.Text,
+                    Genre = txtGenre.Text,
                     Chorus = txtChorus.Text,
                     Verse = txtVerse.Text,
                 };
-                    
+
                 using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
                 {
                     conn.CreateTable<Lyric>();
                     int rows = conn.Insert(lyric);
 
-                    if(rows > 0)
+                    if (rows > 0)
                     {
-                       await DisplayAlert("Success", "Lyrics have been successfully Saved", "Ok");
+                        await DisplayAlert("Success", "Lyrics have been successfully Saved", "Ok");
                     }
                     else
                     {
-                       await DisplayAlert("Failed", "Lyrics have Failed to be saved", "Ok");
+                        await DisplayAlert("Failed", "Lyrics have Failed to be saved", "Ok");
                     };
                 }
             }
-    }
-        
+        }
+
+        private void tmpSave()
+        {
+            var prop = Application.Current as App;
+            prop.Properties[titleKey] = txtTitle.Text;
+            prop.Properties[chorusKey] = txtChorus.Text;
+            prop.Properties[VerseKey] = txtVerse.Text;
+        }
+        private void OnChange(object sender, EventArgs e)
+        {
+            tmpSave();
+
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            //tmpSave();
+
+        }
     }
 }
+

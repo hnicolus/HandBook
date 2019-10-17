@@ -14,6 +14,14 @@
               IsPullToRefreshEnabled="True"
               SeparatorVisibility="None"
               Refreshing="TaskList_Refreshing" HasUnevenRows="True" Header="Tasks" >
+            <!--<ListView.HeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label Text="Today" FontAttributes="Bold" FontSize="Large"/>
+                        
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.HeaderTemplate>-->
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell >

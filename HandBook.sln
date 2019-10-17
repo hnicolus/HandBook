@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandBook.Android", "HandBoo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandBook.iOS", "HandBook\HandBook.iOS\HandBook.iOS.csproj", "{AC132517-A127-455A-9A6C-F45B4085A588}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandBook", "HandBook\HandBook\HandBook.csproj", "{FA273545-8524-4098-9C50-4689EEF505BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HandBook", "HandBook\HandBook\HandBook.csproj", "{FA273545-8524-4098-9C50-4689EEF505BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,7 +5,8 @@
              xmlns:sys="clr-namespace:system;assembly=mscorlib"
              xmlns:local1="clr-namespace:HandBook.Extensions" Padding="20">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Delete" Order="Secondary"/>
+        <ToolbarItem Text="Save" Order="Secondary"  Clicked="BtnSave_Clicked" />
+        <ToolbarItem Text="Delete" Order="Secondary" Clicked="Button_Clicked" />
     </ContentPage.ToolbarItems>
     <TableView HasUnevenRows="True" >
         <TableRoot>
@@ -16,6 +17,15 @@
             <TableSection Title="Task Duration">
                 <local1:DateCell Label="Start" x:Name="txtStart" Date="09 09 2019"/>
                 <local1:DateCell Label="End" x:Name="txtEnd" Date="09 09 2019"/>
+            </TableSection>
+            <TableSection Title="Full Description">
+                <ViewCell>
+                    <ScrollView>
+                        <StackLayout VerticalOptions="FillAndExpand" HeightRequest="200" >
+                            <Editor x:Name="txtDetail" Text="{Binding Detail}" VerticalOptions="FillAndExpand" />
+                        </StackLayout>
+                    </ScrollView>
+                </ViewCell>
             </TableSection>
             <TableSection>
                 <ViewCell >

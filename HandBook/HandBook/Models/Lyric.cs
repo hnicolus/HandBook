@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HandBook.Models
 {
-    public class Lyric
+    public class Lyric 
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -17,7 +17,6 @@ namespace HandBook.Models
         public string Genre { get; set; }
         public string Chorus {get;set;}
         public string Verse { get; set; }
-
-
+        public bool Islocked { get; set; }
     }
 }

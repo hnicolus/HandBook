@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HandBook.Views.About.AboutPage">
+    <ScrollView>
+        <StackLayout >
+            <Label FontAttributes="Bold" FontSize="Default" Text="HandBook App" VerticalOptions="Center"/>
+            <Label Text="Developed by : N.H Maluleke" />
+            <Label x:Name="txtAbout" HorizontalOptions="Start"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

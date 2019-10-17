@@ -23,14 +23,8 @@ namespace HandBook
         {
            base.OnAppearing();
 
-           using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-
-                conn.CreateTable<Lyric>();
-                var list = conn.Table<Lyric>().ToList<Lyric>();
                 refresh();
-              
-           };
+
         }
 
         private void refresh()
@@ -47,7 +41,8 @@ namespace HandBook
                 {
                     btnTopAdd.IsVisible = false;
                 }
-                LyricsList.ItemsSource = notes;
+                LyricsList.ItemsSource = notes.Reverse<Lyric>();
+               
 
             }
         }
