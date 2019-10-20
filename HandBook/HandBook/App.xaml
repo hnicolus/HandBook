@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HandBook.App">
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <Color x:Key="pinkColor">#F01CFF</Color>
+            <Color x:Key="BlueColor" >#072A62</Color>
+            <Color x:Key="greyColor" >#6F7492</Color>
+            <Color x:Key="whiteColor" >#FFFFFF</Color>
+        
+            <Color x:Key="lightestBlueColor">#1CACFF</Color>
+            <Color x:Key="lightBlueColor">#1C8EFF</Color>
+
+            <!--<Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource pinkColor}"/>
+                <Setter Property="TextColor"  Value="{StaticResource whiteColor}"/>
+                <Setter Property="CornerRadius" Value="10"/>
+
+            </Style>
+            <Style x:Key="pinkButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource pinkColor}"/>
+                <Setter Property="TextColor"  Value="{StaticResource whiteColor}"/>
+                <Setter Property="CornerRadius" Value="10"/>
+
+            </Style>
+            <Style x:Key="blueButton" TargetType="Button">
+                <Setter Property="BorderRadius" Value="10"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource blueColor }"/>
+                <Setter Property="TextColor" Value="{StaticResource whiteColor}"/>
+            </Style>
+
+            <Style x:Key="greyButton" TargetType="Button">
+                <Setter Property="BorderRadius" Value="10"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource greyColor }"/>
+                <Setter Property="TextColor" Value="{StaticResource whiteColor}"/>
+            </Style>-->
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

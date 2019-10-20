@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HandBook.PersonalNotePage" BackgroundImage="background.png">
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
+            <Frame x:Name="btnTopAdd" HasShadow="True" CornerRadius="10" Padding="0" Margin="50,10" >
+                <Button  Text="Add new Note" 
+                x:Name="btnNewNote"
+                Clicked="BtnNewNote_Clicked"
+                TextColor="{StaticResource whiteColor}"     
+                BackgroundColor="{StaticResource BlueColor}"
+                       Image="Edit_pencil.png"/>
+            </Frame>
+            <ListView x:Name="notesList" ItemSelected="NotesList_ItemSelected" 
+              IsPullToRefreshEnabled="True" 
+              SeparatorVisibility="None"
+              Refreshing="NotesList_Refreshing"
+                      
+              HasUnevenRows="True"
+                      >
+
+                <ListView.ItemTemplate>
+
+                    <DataTemplate >
+
+                        <ViewCell >
+                            <AbsoluteLayout Margin="5,5" >
+                                <Frame BackgroundColor="{StaticResource lightBlueColor}"  HasShadow="True" Margin="10,20,10,0"
+                                   CornerRadius="20"
+                                   TabIndex="0"
+                                    AbsoluteLayout.LayoutBounds="0,0,0.95,150" AbsoluteLayout.LayoutFlags="WidthProportional" >
+                                    <StackLayout HorizontalOptions="StartAndExpand" Padding="0,30,0,0" >
+                                        <Label   Text="{Binding body}" TextColor="{StaticResource whiteColor}"/>
+                                    </StackLayout>
+                                </Frame>
+                                <Frame BackgroundColor="{StaticResource lightestBlueColor}"  CornerRadius="20" Padding="0" HasShadow="True" 
+                                   AbsoluteLayout.LayoutBounds="0,0,1,50"  AbsoluteLayout.LayoutFlags="WidthProportional" HeightRequest="10" TabIndex="1"  >
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding title}" VerticalTextAlignment="Center"  HorizontalOptions="CenterAndExpand" TextColor="{StaticResource whiteColor}" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                                        <ImageButton BackgroundColor="Transparent" HorizontalOptions="End" Margin="0,0,20,0"  Source="Edit_pencil.png"/>
+                                    </StackLayout>
+                                </Frame>
+                            </AbsoluteLayout>
+                            <ViewCell.ContextActions>
+                                <MenuItem x:Name="btnDelete" Text="Delete" IsDestructive="True"  Clicked="BtnDelete_Clicked" CommandParameter="{Binding .}"/>
+                            </ViewCell.ContextActions>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        <Frame CornerRadius="100" HasShadow="True" AbsoluteLayout.LayoutBounds="1,1,70,70" 
+               Margin="0,0,10,10"
+               AbsoluteLayout.LayoutFlags="PositionProportional" 
+               BackgroundColor="{StaticResource BlueColor}">
+            <ImageButton Source="Edit_pencil.png" Aspect="Fill" BackgroundColor="Transparent"   x:Name="btnFloatNewNote"
+                Clicked="BtnNewNote_Clicked" />
+        </Frame>
+    </AbsoluteLayout>
+</ContentPage>
