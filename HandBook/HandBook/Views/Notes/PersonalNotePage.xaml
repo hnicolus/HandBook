@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:HandBook"
              x:Class="HandBook.PersonalNotePage" BackgroundImage="background.png">
     <AbsoluteLayout>
         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
@@ -16,9 +17,7 @@
               IsPullToRefreshEnabled="True" 
               SeparatorVisibility="None"
               Refreshing="NotesList_Refreshing"
-                      
-              HasUnevenRows="True"
-                      >
+              HasUnevenRows="True" >
 
                 <ListView.ItemTemplate>
 
@@ -31,13 +30,13 @@
                                    TabIndex="0"
                                     AbsoluteLayout.LayoutBounds="0,0,0.95,150" AbsoluteLayout.LayoutFlags="WidthProportional" >
                                     <StackLayout HorizontalOptions="StartAndExpand" Padding="0,30,0,0" >
-                                        <Label   Text="{Binding body}" TextColor="{StaticResource whiteColor}"/>
+                                        <Label   Text="{Binding Body}" TextColor="{StaticResource whiteColor}"/>
                                     </StackLayout>
                                 </Frame>
                                 <Frame BackgroundColor="{StaticResource lightestBlueColor}"  CornerRadius="20" Padding="0" HasShadow="True" 
                                    AbsoluteLayout.LayoutBounds="0,0,1,50"  AbsoluteLayout.LayoutFlags="WidthProportional" HeightRequest="10" TabIndex="1"  >
                                     <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding title}" VerticalTextAlignment="Center"  HorizontalOptions="CenterAndExpand" TextColor="{StaticResource whiteColor}" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding Title}" VerticalTextAlignment="Center"  HorizontalOptions="CenterAndExpand" TextColor="{StaticResource whiteColor}" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
                                         <ImageButton BackgroundColor="Transparent" HorizontalOptions="End" Margin="0,0,20,0"  Source="Edit_pencil.png"/>
                                     </StackLayout>
                                 </Frame>
@@ -49,6 +48,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <StackLayout x:Name="stackLayout" BackgroundColor="Yellow" VerticalOptions="FillAndExpand" Padding="0,0,0,0">
+                <!--<Label Text="Banner Advertisement" HorizontalOptions="CenterAndExpand" TextColor="Green" FontSize="25" />-->
+                <local:AdBanner Size="Standardbanner" VerticalOptions="EndAndExpand"/>
+            </StackLayout>
         </StackLayout>
         <Frame CornerRadius="100" HasShadow="True" AbsoluteLayout.LayoutBounds="1,1,70,70" 
                Margin="0,0,10,10"

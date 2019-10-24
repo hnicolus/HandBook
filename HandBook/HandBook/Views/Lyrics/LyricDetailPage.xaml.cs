@@ -11,25 +11,23 @@ using Xamarin.Forms.Xaml;
 
 namespace HandBook
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class LyricDetailPage : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class LyricDetailPage : ContentPage
+    {
         Lyric selectedLyric;
-		public LyricDetailPage (Lyric selectedLyric)
-		{
-			InitializeComponent ();
+        public LyricDetailPage(Lyric selectedLyric)
+        {
+            InitializeComponent();
 
             this.selectedLyric = selectedLyric;
-            txtTitle.Text = selectedLyric.Title;
-            txtChorus.Text = selectedLyric.Chorus;
-            txtLyrics.Text = selectedLyric.Verse;
-		}
+            BindingContext = selectedLyric;
+        }
 
 
 
         async private void BtnDelete_Clicked(object sender, EventArgs e)
         {
-          
+
             var response = await DisplayAlert("Warning", "Are you sure you want to Delete this?", "Yes", "No");
 
             if (response)
@@ -42,7 +40,7 @@ namespace HandBook
                     if (rows > 0)
                     {
                         await DisplayAlert("Success", "Lyrics have been successfully Deleted", "Ok");
-                         
+
                     }
                     else
                     {
@@ -52,8 +50,8 @@ namespace HandBook
                     await Navigation.PopAsync();
                 }
             }
-    
-     
+
+
 
         }
 
@@ -65,9 +63,14 @@ namespace HandBook
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            txtTitle.Text = selectedLyric.Title;
-            txtChorus.Text = selectedLyric.Chorus;
-            txtLyrics.Text = selectedLyric.Verse;
+
+        }
+
+        private void BtnFavourite_Clicked(object sender, EventArgs e)
+        {
+            var noteItem = sender as MenuItem;
+            var note = noteItem.CommandParameter as Note;
+            if (note.IsFavourite == true ? note.IsFavourite == false : note.IsFavourite == true);
         }
     }
 }

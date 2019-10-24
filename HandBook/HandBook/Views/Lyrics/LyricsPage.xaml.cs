@@ -27,7 +27,7 @@ namespace HandBook
             {
 
                 conn.CreateTable<Lyric>();
-                var list = conn.Table<Lyric>().ToList<Lyric>();
+                List<Lyric> list = conn.Table<Lyric>().ToList<Lyric>();
                 refresh();
               
            };
@@ -47,7 +47,7 @@ namespace HandBook
                 {
                     btnTopAdd.IsVisible = false;
                 }
-                LyricsList.ItemsSource = notes;
+                LyricsList.ItemsSource = notes.OrderBy(b => b.Id);
 
             }
         }

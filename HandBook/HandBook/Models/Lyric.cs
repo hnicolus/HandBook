@@ -5,19 +5,14 @@ using System.Text;
 
 namespace HandBook.Models
 {
-    public class Lyric
+    public class Lyric : Post
     {
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-
-        [MaxLength(30)]
-        public string Title { get; set; }
+     
 
         [MaxLength(30)]
         public string Genre { get; set; }
+
         public string Chorus {get;set;}
         public string Verse { get; set; }
-
-
     }
 }

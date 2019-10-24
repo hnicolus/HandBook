@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HandBook.LyricDetailPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add new Verse"  x:Name="btnAddVerse" Clicked="BtnEdit_Clicked"/>
+        <ToolbarItem Text=" Mark as Favourite " x:Name="btnFavourite" Order="Secondary" Clicked="BtnFavourite_Clicked"/>
+        
+        <ToolbarItem Text="Share " x:Name="btnShare" />
+        <ToolbarItem x:Name="btnDelete" Text="Delete" Clicked="BtnDelete_Clicked"/>
+        <ToolbarItem Text="Edit"  x:Name="btnEdit" Clicked="BtnEdit_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout>
+                    <Label Text="Title :" FontAttributes="Bold"  />
+                    <Label  Text="{Binding Title}" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Chorus :" FontAttributes="Bold"  />
+                    <Label Text="{Binding Chorus}" />
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Verse :" FontAttributes="Bold"  />
+                    <Label Text="{Binding Verse}"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

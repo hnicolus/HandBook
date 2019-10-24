@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HandBook.Views.RecycleBin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,14 +18,11 @@ namespace HandBook
 			InitializeComponent ();
 		}
 
-        async private void BtnAdd_Clicked(object sender, EventArgs e)
+        private async void BtnBin_Clicked(object sender, EventArgs e)
         {
-           await Navigation.PushAsync(new NewNotesPage());
-        }
-
-        async private void BtnAddTask_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new AddTaskPage());
+           
+            await Navigation.PushAsync(new RecycleHomePage());
+           
         }
     }
 }

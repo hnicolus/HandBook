@@ -5,13 +5,8 @@ using System.Text;
 
 namespace HandBook.Models
 {
-    public class ToDoTask
+    public class ToDoTask : Post
     {
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-
-        [MaxLength(30)]
-        public string Title { get; set; }
         public DateTime StartTime { get; set; }
         public bool Notify { get; set; }
         public DateTime Start { get; set; }

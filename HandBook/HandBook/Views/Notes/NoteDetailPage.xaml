@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HandBook.NoteDetailPage" BackgroundImage="background.png" >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete" x:Name="btnDelete" Clicked="BtnDelete_Clicked" IsDestructive="True" />
+        <ToolbarItem Text="Share" x:Name="btnShare" />
+        <ToolbarItem Text="Copy" x:Name="btnCopyAll"/>
+        <ToolbarItem Text="Export to file" x:Name="btnSaveToTxt"  Order="Secondary"  />
+        <ToolbarItem Text="Edit" x:Name="btnSave" Clicked="BtnEdit_Clicked" />
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <StackLayout Spacing="0">
+
+            <Frame HasShadow="True"  CornerRadius="0" Padding="10">
+                <StackLayout Orientation="Vertical" >
+                    <Label Text="{Binding Title}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center"  FontSize="Large"  />
+                    <Label Text="{Binding PubDate}" />
+                </StackLayout>
+            </Frame>
+            <Frame HasShadow="False"  CornerRadius="0" VerticalOptions="FillAndExpand">
+                <StackLayout>
+                    <Label Text="{Binding Body}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+            </Frame>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

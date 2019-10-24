@@ -5,17 +5,8 @@ using System.Text;
 
 namespace HandBook.Models
 {
-    public class Note
+    public class Note : Post
     {
-
-       [PrimaryKey,AutoIncrement]
-       public int Id { get; set; }
-
-       [MaxLength(30)]
-       public string title { get; set; }
-
-       public string body { get; set; } 
-
-       public bool isFavourite { get; set; }
+        public string Body { get; set; } 
     }
 }
