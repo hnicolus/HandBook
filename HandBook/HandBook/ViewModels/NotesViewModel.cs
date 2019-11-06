@@ -11,7 +11,7 @@ namespace HandBook.ViewModels
 {
     class NotesViewModel
     {
-        private Note Note { get; set; }
+        public Note Note { get; set; }
 
         private List<Note> _notes;
         public List<Note> Notes

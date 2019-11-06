@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HandBook.Core.Functions;
+using HandBook.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,18 +18,25 @@ namespace HandBook
 	{
 
 		Note selectedNote;
+		private NotesViewModel _context;
 		public NoteDetailPage(Note selectedNote)
 		{
 			InitializeComponent();
 			this.selectedNote = selectedNote;
 			BindingContext = selectedNote;
+			_context = new NotesViewModel()
+			{
+				Note = selectedNote,
+			};
+			_context.FetchList();
 
 		}
 
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
-			BindingContext = selectedNote;
+
+			BindingContext = _context.Notes.SingleOrDefault(b => b.Id == selectedNote.Id);
 		}
 
 		async private void BtnEdit_Clicked(object sender, EventArgs e)

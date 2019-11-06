@@ -3,10 +3,11 @@ using HandBook.ViewModels;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using HandBook.Core.Functions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -35,7 +36,8 @@ namespace HandBook
         {
             Content.FetchList();
 
-             var notes = Content.Notes;
+             var notes = Content.Notes.Where(b => b.IsDeleted == false).ToList();
+             
              btnTopAdd.IsVisible = Content.TableExists();
             notesList.ItemsSource = notes
                 .Where(b => b.IsDeleted == false)
@@ -63,9 +65,8 @@ namespace HandBook
             var response = await DisplayAlert("Warning", "Are you sure you want to delete this item ?", "Yes", "No");
             if (response)
             {
-                note.IsDeleted = true;
-                
-                if (note.IsDeleted)
+               var deleted = Crud.DeleteItem(note);
+                if (deleted)
                 {
                     await DisplayAlert("Success", "Notes have been successfully Deleted", "Ok");
                 }
@@ -73,7 +74,7 @@ namespace HandBook
                 {
                     await DisplayAlert("Failed", "Notes have Failed to be Deleted", "Ok");
                 };
-
+               
             }
             Refresh();
         }
