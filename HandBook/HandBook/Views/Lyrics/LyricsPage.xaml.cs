@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using HandBook.Core.Functions;
+using HandBook.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,42 +15,25 @@ namespace HandBook
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LyricsPage : ContentPage
     {
+        private LyricsViewModel _context;
         public LyricsPage()
         {
             InitializeComponent();
+            _context =new LyricsViewModel();
         }
 
         protected override void OnAppearing()
         {
            base.OnAppearing();
+           _context.FetchList();
 
-           using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-
-                conn.CreateTable<Lyric>();
-                List<Lyric> list = conn.Table<Lyric>().ToList<Lyric>();
-                refresh();
-              
-           };
         }
 
         private void refresh()
         {
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-                conn.CreateTable<Lyric>();
-                var notes = conn.Table<Lyric>().ToList();
-                if (notes.Count <= 0)
-                {
-                    btnTopAdd.IsVisible = true;
-                }
-                else
-                {
-                    btnTopAdd.IsVisible = false;
-                }
-                LyricsList.ItemsSource = notes.OrderBy(b => b.Id);
-
-            }
+            _context.FetchList();
+            LyricsList.ItemsSource = _context.Lyrics.OrderBy(b => b.Id);
+            btnTopAdd.IsVisible = _context.TableExists();
         }
         async private void BtnDelete_Clicked(object sender, EventArgs e)
         {
@@ -60,21 +44,18 @@ namespace HandBook
 
             if (response)
             {
-                using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-                {
-                    conn.CreateTable<Lyric>();
-                    int rows = conn.Delete(lyric);
+                var delete = Crud.DeleteItem(lyric);
 
-                    if (rows > 0)
-                    {
-                       await DisplayAlert("Success", "Lyrics have been successfully Deleted", "Ok");
-                        
-                    }
-                    else
-                    {
-                       await DisplayAlert("Failed", "Lyrics have Failed to be Deleted", "Ok");
-                    };
+                if (delete)
+                {
+                   await DisplayAlert("Success", "Lyrics have been successfully Deleted", "Ok");
+                    
                 }
+                else
+                {
+                   await DisplayAlert("Failed", "Lyrics have Failed to be Deleted", "Ok");
+                }
+                
             }
             refresh();
 

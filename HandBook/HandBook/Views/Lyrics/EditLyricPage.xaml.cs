@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using HandBook.Core.Functions;
+using HandBook.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,11 +16,17 @@ namespace HandBook
 	public partial class EditLyricPage : ContentPage
 	{
 		Lyric selectedLyric;
+		private LyricsViewModel _context;
 		public EditLyricPage ( Lyric selectedLyric)
 		{
 			InitializeComponent ();
-			this.selectedLyric = selectedLyric;
-			BindingContext = selectedLyric;
+			_context = new LyricsViewModel()
+			{
+				Lyric = selectedLyric,
+			};
+			this.selectedLyric = _context.Lyric;
+			BindingContext = _context.Lyric;
+
 		}
 
 		public EditLyricPage()
@@ -34,20 +41,17 @@ namespace HandBook
 
 			if (response)
 			{
-				using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+				var deleted = Crud.DeleteItem(selectedLyric);
+				
+				if (deleted)
 				{
-					conn.CreateTable<Lyric>();
-					int rows = conn.Delete(selectedLyric);
-
-					if (rows > 0)
-					{
-						await DisplayAlert("Success", "Lyrics have been successfully Deleted", "Ok");
-					}
-					else
-					{
-						await DisplayAlert("Failed", "Lyrics have Failed to be Deleted", "Ok");
-					};
+					await DisplayAlert("Success", "Lyrics have been successfully Deleted", "Ok");
 				}
+				else
+				{
+					await DisplayAlert("Failed", "Lyrics have Failed to be Deleted", "Ok");
+				};
+				
 			}
 			else
 			{
@@ -65,48 +69,43 @@ namespace HandBook
 		
 
 		if(selectedLyric != null)
-			{
-				using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-				{
-					conn.CreateTable<Lyric>();
-					int rows = conn.Update(selectedLyric);
+		{
+			var updated = Crud.Update(selectedLyric);
 
-					if (rows > 0)
-					{
-						await DisplayAlert("Success", "Lyrics have been successfully Deleted", "Ok");
-					}
-					else
-					{
-						await DisplayAlert("Failed", "Lyrics have Failed to be Deleted", "Ok");
-					};
-				}
+			if (updated)
+
+			{
+				await DisplayAlert("Success", "Lyrics have been successfully Deleted", "Ok");
 			}
 			else
 			{
-				Lyric lyric = new Lyric()
-				{
-					Title = txtTitle.Text,
-					Chorus = txtChorus.Text,
-					Genre = txtGenre.Text,
-					Verse = txtVerse.Text,
-					PubDate = DateTime.Today,
-				};
-					
-				using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-				{
-					conn.CreateTable<Lyric>();
-					int rows = conn.Insert(lyric);
+				await DisplayAlert("Failed", "Lyrics have Failed to be Deleted", "Ok");
+			};
+				
+		}
+		else
+		{
+			var lyric = new Lyric()
+			{
+				Title = txtTitle.Text,
+				Chorus = txtChorus.Text,
+				Genre = txtGenre.Text,
+				Verse = txtVerse.Text,
+				PubDate = DateTime.Today,
+			};
 
-					if(rows > 0)
-					{
-					   await DisplayAlert("Success", "Lyrics have been successfully Saved", "Ok");
-					}
-					else
-					{
-					   await DisplayAlert("Failed", "Lyrics have Failed to be saved", "Ok");
-					};
-				}
+			var save = await Crud.SaveAsync(lyric);
+
+			if(save)
+			{
+			   await DisplayAlert("Success", "Lyrics have been successfully Saved", "Ok");
 			}
+			else
+			{
+			   await DisplayAlert("Failed", "Lyrics have Failed to be saved", "Ok");
+			};
+			
+		}
 	}
 		
 	}

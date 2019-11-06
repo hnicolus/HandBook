@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using HandBook.Core.Functions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,7 +16,6 @@ namespace HandBook
 	public partial class NewNotesPage : ContentPage
 	{
 		Note selectedNote;
-        new NotesViewModel Content ;
 		public NewNotesPage ()
 		{
 			InitializeComponent ();
@@ -32,21 +31,21 @@ namespace HandBook
 
 		}
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-        
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+		
 
-        }
+		}
 
-        async private void BtnSave_Clicked(object sender, EventArgs e)
+		async private void BtnSave_Clicked(object sender, EventArgs e)
 		{
 			if(selectedNote != null)
 			{
 				selectedNote.Title = txtTitle.Text;
 				selectedNote.Body = txtNewNote.Text;
 
-			   var isUpdated =  Content.Update(selectedNote);
+			   var isUpdated =  Crud.Update(selectedNote);
 
 				if (isUpdated)
 				{
@@ -64,21 +63,17 @@ namespace HandBook
 					IsDeleted = false,
 				};
 
+				var saved = await Crud.SaveAsync(note);
 
-				using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+				if (saved)
 				{
-					conn.CreateTable<Note>();
-					int rows = conn.Insert(note);
 
-					if (rows > 0)
-					{
-						await DisplayAlert("Success", "Notes have been successfully Saved", "Ok");
-					}
-					else
-					{
-						await DisplayAlert("Failed", "Notes have Failed to be saved", "Ok");
-					};
+					await DisplayAlert("Success", "Notes has been saved", "Ok");
+				}
+				else
+				{
 
+					await DisplayAlert("Failed", "Notes have Failed to be saved", "Ok");
 				}
 			}
 

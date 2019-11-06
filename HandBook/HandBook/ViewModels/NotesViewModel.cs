@@ -5,75 +5,43 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
+using HandBook.Core.Functions;
 
 namespace HandBook.ViewModels
 {
     class NotesViewModel
     {
+        private Note Note { get; set; }
 
-        public bool tableExists ;
+        private List<Note> _notes;
+        public List<Note> Notes
+        {
+            get { return _notes
+                .Where( n => n.Deleted == false)
+                .OrderByDescending( b => b.Id)
+                .ToList(); }
+
+            set { _notes = value; }
+        }
 
         public NotesViewModel()
         {
-            refresh();
+            FetchList();
         }
-     
-        public List<Note> refresh()
+        
+        //Method to Returns data from database
+        public void FetchList()
         {
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-                conn.CreateTable<Note>();
-                var notes = conn.Table<Note>().ToList();
-                if (notes.Count <= 0)
-                {
-                    tableExists = true;
-                }
-                else
-                {
-                    tableExists = false;
-                }
-                return notes;
-            }
-            
+            Notes = Crud.FetchNotes();
+
         }
 
-        public bool Update(Note note)
+
+        public bool TableExists()
         {
-            Note selectedNote = note;
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-                conn.CreateTable<Note>();
-                int rows = conn.Update(selectedNote);
+            return (Notes.Count <= 0);
 
-                if (rows > 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                };
-            }
         }
 
-        public bool DeleteItem(Note item)
-        {
-            var note = item;
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-                conn.CreateTable<Note>();
-                int rows = conn.Delete(note);
-
-                if (rows > 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                };
-            }
-         
-        }
     }
 }

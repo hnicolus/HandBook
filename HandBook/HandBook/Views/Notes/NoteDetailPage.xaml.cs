@@ -2,10 +2,11 @@
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using HandBook.Core.Functions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -42,12 +43,8 @@ namespace HandBook
 
 			if (response)
 			{
-				using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-				{
-					conn.CreateTable<Note>();
-					int rows = conn.Delete(selectedNote);
-
-					if (rows > 0)
+				var deleted = Crud.DeleteItem(selectedNote);
+					if (deleted)
 					{
 						await DisplayAlert("Success", "Notes have been successfully Deleted", "Ok");
 					}
@@ -56,7 +53,6 @@ namespace HandBook
 						await DisplayAlert("Failed", "Notes have Failed to be Deleted", "Ok");
 					};
 					await Navigation.PopAsync();
-				}
 			}
 			else
 			{

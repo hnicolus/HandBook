@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using HandBook.Core.Functions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,57 +15,59 @@ namespace HandBook.Views.RecycleBin
 	public partial class NoteBinPage : ContentPage
 	{
 
-		private new NotesViewModel Content ;
+		private new NotesViewModel Content = new NotesViewModel();
 		public NoteBinPage ()
 		{
 			InitializeComponent ();
-            refresh();
-        }
+			refresh();
+		}
 
-        async private void BtnDelete_Clicked(object sender, EventArgs e)
-        {
-            var menuItem = sender as MenuItem;
-            var note = menuItem.CommandParameter as Note;
-            var response = await DisplayAlert("Warning", "Are you sure you want to delete this item ?", "Yes", "No");
-            if (response)
-            {
-                note.IsDeleted = true;
-                var Delete = Content.DeleteItem(note);
-                if (Delete)
-                {
-                    await DisplayAlert("Success", "Notes have been successfully Deleted", "Ok");
-                }
-                else
-                {
-                    await DisplayAlert("Failed", "Notes have Failed to be Deleted", "Ok");
-                };
+		async private void BtnDelete_Clicked(object sender, EventArgs e)
+		{
+			var menuItem = sender as MenuItem;
+			var note = menuItem.CommandParameter as Note;
+			var response = await DisplayAlert("Warning", "Are you sure you want to delete this item ?", "Yes", "No");
+			if (response)
+			{
+				note.IsDeleted = true;
 
-            }
-            refresh();
+				var Delete = Crud.DeleteItem(note);
 
-        }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            refresh();
-        }
+				if (Delete)
+				{
+					await DisplayAlert("Success", "Notes have been successfully Deleted", "Ok");
+				}
+				else
+				{
+					await DisplayAlert("Failed", "Notes have Failed to be Deleted", "Ok");
+				};
 
-        private void refresh()
-        {
-            var list = Content.refresh();
-            list = list.Where(b => b.IsFavourite == true).OrderBy(b => b.Id).ToList();
-            NotesList.ItemsSource = list;
-        }
+			}
+			refresh();
 
-        private async void NotesList_ItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            var note = NotesList.SelectedItem as Note;
-            
-            var response = await DisplayAlert("Alert", "Do you want to Restore Selected File ?", "Yes", "No");
-            if (response)
-            {
-                note.IsDeleted = false;
-            }
-        }
-    }
+		}
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+			refresh();
+		}
+
+		private void refresh()
+		{
+			var list = Content.Notes;
+			list = list.Where(b => b.IsDeleted).OrderBy(b => b.Id).ToList();
+			NotesList.ItemsSource = list;
+		}
+
+		private async void NotesList_ItemTapped(object sender, ItemTappedEventArgs e)
+		{
+			var note = NotesList.SelectedItem as Note;
+			
+			var response = await DisplayAlert("Alert", "Do you want to Restore Selected File ?", "Yes", "No");
+			if (response)
+			{
+				note.IsDeleted = false;
+			}
+		}
+	}
 }

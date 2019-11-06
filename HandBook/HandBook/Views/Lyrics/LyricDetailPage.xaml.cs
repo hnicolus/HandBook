@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using HandBook.Core.Functions;
+using HandBook.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,13 +15,18 @@ namespace HandBook
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LyricDetailPage : ContentPage
     {
-        Lyric selectedLyric;
+      
+        LyricsViewModel _context;
         public LyricDetailPage(Lyric selectedLyric)
         {
             InitializeComponent();
 
-            this.selectedLyric = selectedLyric;
-            BindingContext = selectedLyric;
+            _context = new LyricsViewModel()
+            {
+                Lyric = selectedLyric
+            };
+           
+            BindingContext = _context.Lyric;
         }
 
 
@@ -32,15 +38,11 @@ namespace HandBook
 
             if (response)
             {
-                using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-                {
-                    conn.CreateTable<Lyric>();
-                    int rows = conn.Delete(selectedLyric);
-
-                    if (rows > 0)
+                var deleted = Crud.DeleteItem(_context.Lyric);
+                
+                    if (deleted)
                     {
                         await DisplayAlert("Success", "Lyrics have been successfully Deleted", "Ok");
-
                     }
                     else
                     {
@@ -48,21 +50,21 @@ namespace HandBook
                     };
 
                     await Navigation.PopAsync();
-                }
             }
-
-
 
         }
 
         async private void BtnEdit_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new EditLyricPage(selectedLyric));
+            await Navigation.PushAsync(new EditLyricPage(_context.Lyric));
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            _context.FetchList();
+        var item =  _context.Lyrics.SingleOrDefault(b => b.Id == _context.Lyric.Id);
+        _context.Lyric = item;
 
         }
 
@@ -70,7 +72,7 @@ namespace HandBook
         {
             var noteItem = sender as MenuItem;
             var note = noteItem.CommandParameter as Note;
-            if (note.IsFavourite == true ? note.IsFavourite == false : note.IsFavourite == true);
+            if (note.IsFavourite ? note.IsFavourite == false : note.IsFavourite == true) ;
         }
     }
 }
