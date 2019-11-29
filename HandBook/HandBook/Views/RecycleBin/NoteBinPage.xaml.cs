@@ -15,59 +15,61 @@ namespace HandBook.Views.RecycleBin
 	public partial class NoteBinPage : ContentPage
 	{
 
-		private new NotesViewModel Content = new NotesViewModel();
+		private readonly NotesViewModel _content = new NotesViewModel();
 		public NoteBinPage ()
 		{
 			InitializeComponent ();
-			refresh();
+			Refresh();
 		}
 
 		async private void BtnDelete_Clicked(object sender, EventArgs e)
 		{
-			var menuItem = sender as MenuItem;
-			var note = menuItem.CommandParameter as Note;
-			var response = await DisplayAlert("Warning", "Are you sure you want to delete this item ?", "Yes", "No");
-			if (response)
+			if (sender is MenuItem menuItem)
 			{
-				note.IsDeleted = true;
-
-				var Delete = Crud.DeleteItem(note);
-
-				if (Delete)
+				var note = menuItem.CommandParameter as Note;
+				var response = await DisplayAlert("Warning", "Are you sure you want to delete this item ?", "Yes", "No");
+				if (response)
 				{
-					await DisplayAlert("Success", "Notes have been successfully Deleted", "Ok");
+					if (note != null)
+					{
+						note.IsDeleted = true;
+
+						var delete = DataAccess.Delete(note);
+
+						if (delete)
+						{
+							await DisplayAlert("Success", "Notes have been successfully Deleted", "Ok");
+						}
+						else
+						{
+							await DisplayAlert("Failed", "Notes have Failed to be Deleted", "Ok");
+						}
+					}
+
 				}
-				else
-				{
-					await DisplayAlert("Failed", "Notes have Failed to be Deleted", "Ok");
-				};
-
 			}
-			refresh();
+
+			Refresh();
 
 		}
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
-			refresh();
+			Refresh();
 		}
 
-		private void refresh()
+		private void Refresh()
 		{
-			var list = Content.Notes;
+			var list = _content.Notes;
 			list = list.Where(b => b.IsDeleted).OrderBy(b => b.Id).ToList();
 			NotesList.ItemsSource = list;
 		}
 
 		private async void NotesList_ItemTapped(object sender, ItemTappedEventArgs e)
 		{
-			var note = NotesList.SelectedItem as Note;
-			
 			var response = await DisplayAlert("Alert", "Do you want to Restore Selected File ?", "Yes", "No");
-			if (response)
-			{
-				note.IsDeleted = false;
-			}
+			if (!response) return;
+			if (NotesList.SelectedItem is Note note) note.IsDeleted = false;
 		}
 	}
 }

@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 using HandBook.Core.Functions;
 using HandBook.Models;
 
@@ -8,21 +7,25 @@ namespace HandBook.ViewModels
 {
     class LyricsViewModel
     {
+        public LyricsViewModel()
+        {
+            FetchList();
+           
+        }
         public Lyric Lyric { get; set; }
-        public List<Lyric> Lyrics { get; set; }
+        public List<Lyric> Lyrics { get;set; }
+        public bool TableExist { get; set; }
+        public void FetchList() => Lyrics = DataAccess.LoadLyrics().OrderBy(b => b.Id).ToList();
 
-        public void FetchList()
+        public void TableExists()
         {
-            Lyrics = Crud.FetchLyrics();
+            TableExist = (Lyrics.Count <= 0);
+        } 
 
-
-        }
-
-        public bool TableExists()
+        public bool Delete( Lyric item)
         {
-            return (Lyrics.Count <= 0);
-
+            var isDelete = DataAccess.Delete(item);
+            return isDelete;
         }
-
     }
 }

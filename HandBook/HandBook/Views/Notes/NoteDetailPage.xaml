@@ -4,9 +4,9 @@
              x:Class="HandBook.NoteDetailPage" BackgroundImage="background.png" >
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Delete" x:Name="btnDelete" Clicked="BtnDelete_Clicked" IsDestructive="True" />
-        <ToolbarItem Text="Share" x:Name="btnShare" />
-        <ToolbarItem Text="Copy" x:Name="btnCopyAll"/>
-        <ToolbarItem Text="Export to file" x:Name="btnSaveToTxt"  Order="Secondary"  />
+
+        <ToolbarItem Text="Copy" x:Name="btnCopyAll" Clicked="btnCopyAll_Clicked"/>
+        <ToolbarItem Text="Export to file" x:Name="btnSaveToTxt" Clicked="btnSaveToTxt_Clicked" Order="Secondary"  />
         <ToolbarItem Text="Edit" x:Name="btnSave" Clicked="BtnEdit_Clicked" />
     </ContentPage.ToolbarItems>
     <ScrollView>

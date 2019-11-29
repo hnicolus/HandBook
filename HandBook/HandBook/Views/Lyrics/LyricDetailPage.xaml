@@ -3,10 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HandBook.LyricDetailPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add new Verse"  x:Name="btnAddVerse" Clicked="BtnEdit_Clicked"/>
         <ToolbarItem Text=" Mark as Favourite " x:Name="btnFavourite" Order="Secondary" Clicked="BtnFavourite_Clicked"/>
-        
-        <ToolbarItem Text="Share " x:Name="btnShare" />
+        <ToolbarItem Text="Copy All" x:Name="btnCoppyAll" Order="Secondary" Clicked="btnCoppyAll_Clicked"/>
         <ToolbarItem x:Name="btnDelete" Text="Delete" Clicked="BtnDelete_Clicked"/>
         <ToolbarItem Text="Edit"  x:Name="btnEdit" Clicked="BtnEdit_Clicked"/>
     </ContentPage.ToolbarItems>

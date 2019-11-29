@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using HandBook.Models;
 using SQLite;
 
 namespace HandBook.Core.Functions
 {
-    class Crud
+    internal class DataAccess
     {
 
         #region Notes CRUD Code Block
-
-        public static List<Note> FetchNotes()
+        public static List<Note> LoadNotes()
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
             {
@@ -38,7 +35,7 @@ namespace HandBook.Core.Functions
         }
 
 
-        public static bool DeleteItem(Note item)
+        public static bool Delete(Note item)
         {
             var note = item;
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
@@ -48,12 +45,11 @@ namespace HandBook.Core.Functions
 
                 int rows = conn.Delete(note);
                 return (rows < totalCount);
-
             }
 
         }
 
-        public static async Task<bool> SaveAsync(Note note)
+        public static bool Save(Note note)
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
             {
@@ -68,7 +64,9 @@ namespace HandBook.Core.Functions
         #region Lyrics  CRUD Code Block
 
 
+#pragma warning disable 1998
         public static async Task<bool> SaveAsync(Lyric lyric)
+#pragma warning restore 1998
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
             {
@@ -79,7 +77,7 @@ namespace HandBook.Core.Functions
             }
         }
 
-        public static List<Lyric> FetchLyrics()
+        public static List<Lyric> LoadLyrics()
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
             {
@@ -94,7 +92,7 @@ namespace HandBook.Core.Functions
         //Updates an item in Database
         public static bool Update(Lyric lyric)
         {
-          
+
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
             {
                 conn.CreateTable<Lyric>();
@@ -105,17 +103,15 @@ namespace HandBook.Core.Functions
         }
 
 
-        public static bool DeleteItem(Lyric item)
+        public static bool Delete(Lyric item)
         {
-           
+
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
             {
                 conn.CreateTable<Lyric>();
                 var totalCount = conn.Table<Lyric>().Count();
-
                 int rows = conn.Delete(item);
                 return (rows < totalCount);
-
             }
 
         }

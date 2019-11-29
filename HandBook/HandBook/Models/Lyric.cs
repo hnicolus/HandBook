@@ -7,7 +7,6 @@ namespace HandBook.Models
 {
     public class Lyric : Post
     {
-     
 
         [MaxLength(30)]
         public string Genre { get; set; }

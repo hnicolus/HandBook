@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using HandBook.Views.Settings;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,11 +18,21 @@ namespace HandBook
 			InitializeComponent ();
 		}
 
-        private async void BtnBin_Clicked(object sender, EventArgs e)
-        {
-           
-            await Navigation.PushAsync(new RecycleHomePage());
-           
-        }
-    }
+		private async void BtnBin_Clicked(object sender, EventArgs e)
+		{
+		   
+			await Navigation.PushAsync(new RecycleHomePage());
+		   
+		}
+
+		private async void btnAbout_Clicked(object sender, EventArgs e)
+		{
+			await Navigation.PushAsync(new AboutPage());
+		}
+
+		private async void Settings_Clicked(object sender, EventArgs e)
+		{
+			await Navigation.PushAsync(new SettingsPage()); ;
+		}
+	}
 }

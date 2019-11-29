@@ -15,8 +15,9 @@ namespace HandBook
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class EditLyricPage : ContentPage
 	{
-		Lyric selectedLyric;
-		private LyricsViewModel _context;
+		readonly Lyric _selectedLyric;
+
+		private readonly LyricsViewModel _context;
 		public EditLyricPage ( Lyric selectedLyric)
 		{
 			InitializeComponent ();
@@ -24,7 +25,7 @@ namespace HandBook
 			{
 				Lyric = selectedLyric,
 			};
-			this.selectedLyric = _context.Lyric;
+			this._selectedLyric = _context.Lyric;
 			BindingContext = _context.Lyric;
 
 		}
@@ -34,14 +35,14 @@ namespace HandBook
 			InitializeComponent();
 		}
 
-	async private void BtnDelete_Clicked(object sender, EventArgs e)
+		private async void BtnDelete_Clicked(object sender, EventArgs e)
 		{
 
 			var response = await DisplayAlert("Warning", "Are you sure you want to Delete this?", "Yes", "No");
 
 			if (response)
 			{
-				var deleted = Crud.DeleteItem(selectedLyric);
+				var deleted = DataAccess.Delete(_selectedLyric);
 				
 				if (deleted)
 				{
@@ -64,49 +65,48 @@ namespace HandBook
 		}
 
 	  
-	async private void BtnUpdate_Clicked(object sender, EventArgs e)
-	{
-		
-
-		if(selectedLyric != null)
+		private async void BtnUpdate_Clicked(object sender, EventArgs e)
 		{
-			var updated = Crud.Update(selectedLyric);
-
-			if (updated)
-
-			{
-				await DisplayAlert("Success", "Lyrics have been successfully Deleted", "Ok");
-			}
-			else
-			{
-				await DisplayAlert("Failed", "Lyrics have Failed to be Deleted", "Ok");
-			};
-				
-		}
-		else
-		{
-			var lyric = new Lyric()
-			{
-				Title = txtTitle.Text,
-				Chorus = txtChorus.Text,
-				Genre = txtGenre.Text,
-				Verse = txtVerse.Text,
-				PubDate = DateTime.Today,
-			};
-
-			var save = await Crud.SaveAsync(lyric);
-
-			if(save)
-			{
-			   await DisplayAlert("Success", "Lyrics have been successfully Saved", "Ok");
-			}
-			else
-			{
-			   await DisplayAlert("Failed", "Lyrics have Failed to be saved", "Ok");
-			};
 			
+			if(_selectedLyric != null)
+			{
+				var updated = DataAccess.Update(_selectedLyric);
+
+				if (updated)
+
+				{
+					await DisplayAlert("Success", "Lyrics have been successfully Deleted", "Ok");
+				}
+				else
+				{
+					await DisplayAlert("Failed", "Lyrics have Failed to be Deleted", "Ok");
+				};
+					
+			}
+			else
+			{
+				var lyric = new Lyric()
+				{
+					Title = txtTitle.Text,
+					Chorus = txtChorus.Text,
+					Genre = txtGenre.Text,
+					Verse = txtVerse.Text,
+					PubDate = DateTime.Today,
+				};
+
+				var save = await DataAccess.SaveAsync(lyric);
+
+				if (!save)
+				{
+					await DisplayAlert("Failed", "Lyrics have Failed to be saved", "Ok");
+				}
+				else
+				{
+					await DisplayAlert("Success", "Lyrics have been successfully Saved", "Ok");
+				}
+
+			}
 		}
-	}
 		
 	}
 }

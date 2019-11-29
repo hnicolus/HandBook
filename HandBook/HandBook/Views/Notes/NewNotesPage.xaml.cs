@@ -15,7 +15,7 @@ namespace HandBook
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NewNotesPage : ContentPage
 	{
-		Note selectedNote;
+		readonly Note _selectedNote;
 		public NewNotesPage ()
 		{
 			InitializeComponent ();
@@ -25,7 +25,7 @@ namespace HandBook
 		{
 			InitializeComponent();
 
-			this.selectedNote = selectedNote;
+			_selectedNote = selectedNote;
 			txtTitle.Text = selectedNote.Title;
 			txtNewNote.Text = selectedNote.Body;
 
@@ -40,12 +40,12 @@ namespace HandBook
 
 		async private void BtnSave_Clicked(object sender, EventArgs e)
 		{
-			if(selectedNote != null)
+			if(_selectedNote != null)
 			{
-				selectedNote.Title = txtTitle.Text;
-				selectedNote.Body = txtNewNote.Text;
+				_selectedNote.Title = txtTitle.Text;
+				_selectedNote.Body = txtNewNote.Text;
 
-			   var isUpdated =  Crud.Update(selectedNote);
+			   var isUpdated =  DataAccess.Update(_selectedNote);
 
 				if (isUpdated)
 				{
@@ -63,11 +63,10 @@ namespace HandBook
 					IsDeleted = false,
 				};
 
-				var saved = await Crud.SaveAsync(note);
+				var saved = DataAccess.Save(note);
 
 				if (saved)
 				{
-
 					await DisplayAlert("Success", "Notes has been saved", "Ok");
 				}
 				else

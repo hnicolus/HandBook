@@ -14,20 +14,12 @@ namespace HandBook.Models
         public string Title { get; set; }
         public  DateTime PubDate { get; set; } 
         public bool IsFavourite { get; set; }
-        public bool IsDeleted = false;
+        public bool IsDeleted;
 
         public bool Deleted
         {
-            get
-            {
-                return IsDeleted;
-            }
-            set
-            {
-                IsDeleted = value;
-            }
+            get => IsDeleted;
+            set =>  IsDeleted = value;
         }
-
-
     }
 }

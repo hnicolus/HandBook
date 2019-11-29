@@ -18,42 +18,42 @@ namespace HandBook
 			InitializeComponent ();
 		}
 
-        async private void BtnSave_Clicked(object sender, EventArgs e)
-        {
+		async private void BtnSave_Clicked(object sender, EventArgs e)
+		{
 
-            ToDoTask tmpTask = new ToDoTask()
-            {
-                Title = txtTitle.Text,
-                Notify = txtNotify.On,
-                Start = txtStart.Date,
-                StartTime = txtStart.Time,
-                End = txtEnd.Date ,
-                EndTime = txtEnd.Time,
-                Completed = false,
-            };
+			var tmpTask = new ToDoTask()
+			{
+				Title = txtTitle.Text,
+				Notify = txtNotify.On,
+				Start = txtStart.Date,
+				StartTime = txtStart.Time,
+				End = txtEnd.Date ,
+				EndTime = txtEnd.Time,
+				Completed = false,
+			};
 
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-                conn.CreateTable<ToDoTask>();
-                int rows = conn.Insert(tmpTask);
+			using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+			{
+				conn.CreateTable<ToDoTask>();
+				var rows = conn.Insert(tmpTask);
 
-                if (rows > 0)
-                {
-                   await DisplayAlert("Success", "Task has been saved", "Ok");
-                   await Navigation.PopAsync();
-                }
-                else
-                {
-                   await DisplayAlert("Failed", "Task have Failed to be saved", "Ok");
-                };
+				if (rows > 0)
+				{
+				   await DisplayAlert("Success", "Task has been saved", "Ok");
+				   await Navigation.PopAsync();
+				}
+				else
+				{
+				   await DisplayAlert("Failed", "Task have Failed to be saved", "Ok");
+				};
 
-            }
+			}
 
-        }
+		}
 
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PopAsync();
-        }
-    }
+		private void Button_Clicked(object sender, EventArgs e)
+		{
+			Navigation.PopAsync();
+		}
+	}
 }

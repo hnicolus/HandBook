@@ -1,55 +1,48 @@
-﻿using Android.Gms.Ads;
-using HandBook;
+﻿using System.ComponentModel;
+using Admob.Droid;
+using Android.Content;
+using Android.Gms.Ads;
+using Android.Widget;
+using HandBook.CustomRenders;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using Android.Content;
-using Android.Views;
 
-namespace HandBook.Droid.CustomRenders
+
+[assembly: ExportRenderer(typeof(AdMobView), typeof(AdMobViewRenderer))]
+namespace Admob.Droid
 {
-    class AdBanner_Droid : ViewRenderer
+    public class AdMobViewRenderer : ViewRenderer<AdMobView, AdView>
     {
-        Context context;
-        public AdBanner_Droid(Context _context) : base(_context)
-        {
-            context = _context;
-        }
-        protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.View> e)
+        public AdMobViewRenderer(Context context) : base(context) { }
+
+        protected override void OnElementChanged(ElementChangedEventArgs<AdMobView> e)
         {
             base.OnElementChanged(e);
-            if (e.OldElement == null)
+            if (e.NewElement != null && Control == null)
+                SetNativeControl(CreateAdView());
+        }
+
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
+
+            if (e.PropertyName == nameof(AdView.AdUnitId))
+                Control.AdUnitId = Element.AdUnitId;
+        }
+
+        private AdView CreateAdView()
+        {
+            var adView = new AdView(Context)
             {
-                var adView = new AdView(Context);
-                switch ((Element as AdBanner).Size)
-                {
-                    case AdBanner.Sizes.Standardbanner:
-                        adView.AdSize = AdSize.Banner;
-                        break;
-                    case AdBanner.Sizes.LargeBanner:
-                        adView.AdSize = AdSize.LargeBanner;
-                        break;
-                    case AdBanner.Sizes.MediumRectangle:
-                        adView.AdSize = AdSize.MediumRectangle;
-                        break;
-                    case AdBanner.Sizes.FullBanner:
-                        adView.AdSize = AdSize.FullBanner;
-                        break;
-                    case AdBanner.Sizes.Leaderboard:
-                        adView.AdSize = AdSize.Leaderboard;
-                        break;
-                    case AdBanner.Sizes.SmartBannerPortrait:
-                        adView.AdSize = AdSize.SmartBanner;
-                        break;
-                    default:
-                        adView.AdSize = AdSize.Banner;
-                        break;
-                }
-                // TODO: change this id to  admob id  
-                adView.AdUnitId = "ca-app-pub-5780847061911787/9892180588";
-                var requestbuilder = new AdRequest.Builder();
-                adView.LoadAd(requestbuilder.Build());
-                SetNativeControl(adView);
-            }
+                AdSize = AdSize.SmartBanner,
+                AdUnitId = Element.AdUnitId
+            };
+
+            adView.LayoutParameters = new LinearLayout.LayoutParams(LayoutParams.MatchParent, LayoutParams.MatchParent);
+
+            adView.LoadAd(new AdRequest.Builder().Build());
+
+            return adView;
         }
     }
 }

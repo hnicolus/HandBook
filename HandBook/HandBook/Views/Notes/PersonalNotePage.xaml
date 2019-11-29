@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:HandBook"
+             xmlns:local1="clr-namespace:HandBook.CustomRenders"
              x:Class="HandBook.PersonalNotePage" BackgroundImage="background.png">
     <AbsoluteLayout>
         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
@@ -30,7 +31,7 @@
                                    TabIndex="0"
                                     AbsoluteLayout.LayoutBounds="0,0,0.95,150" AbsoluteLayout.LayoutFlags="WidthProportional" >
                                     <StackLayout HorizontalOptions="StartAndExpand" Padding="0,30,0,0" >
-                                        <Label   Text="{Binding Body}" TextColor="{StaticResource whiteColor}"/>
+                                        <Label x:Name="bodyText"   Text="{Binding Body}" TextColor="{StaticResource whiteColor}"/>
                                     </StackLayout>
                                 </Frame>
                                 <Frame BackgroundColor="{StaticResource lightestBlueColor}"  CornerRadius="20" Padding="0" HasShadow="True" 
@@ -48,9 +49,12 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <StackLayout x:Name="stackLayout" BackgroundColor="Yellow" VerticalOptions="FillAndExpand" Padding="0,0,0,0">
-                <!--<Label Text="Banner Advertisement" HorizontalOptions="CenterAndExpand" TextColor="Green" FontSize="25" />-->
-                <local:AdBanner Size="Standardbanner" VerticalOptions="EndAndExpand"/>
+            <StackLayout
+                
+                x:Name="stackLayout" BackgroundColor="Yellow" VerticalOptions="FillAndExpand" Padding="0,0,0,0">
+                <Label Text="Banner Advertisement" HorizontalOptions="CenterAndExpand" TextColor="Green" FontSize="25" />
+
+
             </StackLayout>
         </StackLayout>
         <Frame CornerRadius="100" HasShadow="True" AbsoluteLayout.LayoutBounds="1,1,70,70" 

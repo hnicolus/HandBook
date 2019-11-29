@@ -1,6 +1,6 @@
 ﻿using HandBook.Models;
 using HandBook.ViewModels;
-using SQLite;
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,6 +22,7 @@ namespace HandBook
             InitializeComponent ();
             Content = new NotesViewModel();
             Refresh();
+
         }
 
         protected override void OnAppearing()
@@ -41,7 +42,9 @@ namespace HandBook
              btnTopAdd.IsVisible = Content.TableExists();
             notesList.ItemsSource = notes
                 .Where(b => b.IsDeleted == false)
-                .OrderByDescending(b => b.Id);  
+                .OrderByDescending(b => b.Id);
+            
+            
         }
 
         //Selected Item
@@ -56,7 +59,7 @@ namespace HandBook
         }
 
         //Delete an item
-        async private void BtnDelete_Clicked(object sender, EventArgs e)
+        private async void BtnDelete_Clicked(object sender, EventArgs e)
         {
             var menuItem = sender as MenuItem;
 
@@ -65,8 +68,8 @@ namespace HandBook
             var response = await DisplayAlert("Warning", "Are you sure you want to delete this item ?", "Yes", "No");
             if (response)
             {
-               var deleted = Crud.DeleteItem(note);
-                if (deleted)
+               var notDeleted = DataAccess.Delete(note);
+                if (notDeleted)
                 {
                     await DisplayAlert("Success", "Notes have been successfully Deleted", "Ok");
                 }
@@ -85,7 +88,7 @@ namespace HandBook
             notesList.EndRefresh(); 
         }
 
-       async private void BtnNewNote_Clicked(object sender, EventArgs e)
+       private async void BtnNewNote_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new NewNotesPage());
         }

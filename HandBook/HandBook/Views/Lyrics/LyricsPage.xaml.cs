@@ -1,10 +1,6 @@
 ﻿using HandBook.Models;
-using SQLite;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HandBook.Core.Functions;
 using HandBook.ViewModels;
 using Xamarin.Forms;
@@ -15,27 +11,33 @@ namespace HandBook
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LyricsPage : ContentPage
     {
-        private LyricsViewModel _context;
+        
+        private  LyricsViewModel _context;
         public LyricsPage()
         {
-            InitializeComponent();
+            InitializeComponent(); 
             _context =new LyricsViewModel();
+            BindingContext = _context;
+            Refresh();
         }
 
         protected override void OnAppearing()
         {
-           base.OnAppearing();
-           _context.FetchList();
-
+            Refresh();
+            base.OnAppearing();
+        
         }
 
-        private void refresh()
+        private void Refresh()
         {
+            
+            BindingContext = null;
             _context.FetchList();
-            LyricsList.ItemsSource = _context.Lyrics.OrderBy(b => b.Id);
-            btnTopAdd.IsVisible = _context.TableExists();
+            _context.TableExists();
+            BindingContext = _context;
+
         }
-        async private void BtnDelete_Clicked(object sender, EventArgs e)
+    private async void BtnDelete_Clicked(object sender, EventArgs e)
         {
             var menuItem = sender as MenuItem;
 
@@ -44,39 +46,39 @@ namespace HandBook
 
             if (response)
             {
-                var delete = Crud.DeleteItem(lyric);
+                var delete = _context.Delete(lyric);
 
-                if (delete)
+                if (!delete)
                 {
                    await DisplayAlert("Success", "Lyrics have been successfully Deleted", "Ok");
-                    
                 }
                 else
                 {
-                   await DisplayAlert("Failed", "Lyrics have Failed to be Deleted", "Ok");
+                    await DisplayAlert("Failed", "Lyrics have Failed to be Deleted", "Ok");
                 }
-                
             }
-            refresh();
+            Refresh();
 
         }
 
-        async private void BtnAddLyric_Clicked(object sender, EventArgs e)
+        private async void BtnAddLyric_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new EditLyricPage());
         }
 
-       async  private void LyricsList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+       private async void LyricsList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+
             if (LyricsList.SelectedItem is Lyric selectedLyric)
             {
                 await Navigation.PushAsync(new LyricDetailPage(selectedLyric));
+                LyricsList.SelectedItem = null;
             }
         }
 
         private void LyricsList_Refreshing(object sender, EventArgs e)
         {
-            refresh();
+            Refresh();
             LyricsList.EndRefresh();
         }
     }

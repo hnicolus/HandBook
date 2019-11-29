@@ -17,9 +17,9 @@ namespace HandBook
             MainPage = new NavigationPage(new HomePage());
             
         }
-        public App(string databaselocation)
+        public App(string databaseLocation)
         {
-            DatabaseLocation = databaselocation;
+            DatabaseLocation = databaseLocation;
             InitializeComponent();
             MainPage = new NavigationPage(new HomePage());
         }

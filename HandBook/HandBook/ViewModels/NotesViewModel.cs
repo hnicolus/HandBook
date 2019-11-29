@@ -21,7 +21,7 @@ namespace HandBook.ViewModels
                 .OrderByDescending( b => b.Id)
                 .ToList(); }
 
-            set { _notes = value; }
+            set => _notes = value;
         }
 
         public NotesViewModel()
@@ -30,18 +30,9 @@ namespace HandBook.ViewModels
         }
         
         //Method to Returns data from database
-        public void FetchList()
-        {
-            Notes = Crud.FetchNotes();
+        public void FetchList() => Notes =  DataAccess.LoadNotes();
 
-        }
-
-
-        public bool TableExists()
-        {
-            return (Notes.Count <= 0);
-
-        }
+        public bool TableExists() => Notes.Count <= 0;
 
     }
 }

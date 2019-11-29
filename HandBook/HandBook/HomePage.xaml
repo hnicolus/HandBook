@@ -7,9 +7,9 @@
 
     <TabbedPage.ToolbarItems>
      
-        <ToolbarItem x:Name="btnBin" Text="Recycle Bin" Order="Secondary" Clicked="BtnBin_Clicked" />
-        <ToolbarItem x:Name="btnSettings" Text="Settings" Order="Secondary"/>
-        <ToolbarItem x:Name="btnAbout" Text="About Us" Order="Secondary"/>
+        <!--<ToolbarItem x:Name="btnBin" Text="Recycle Bin" Order="Secondary" Clicked="BtnBin_Clicked" />-->
+        <ToolbarItem x:Name="btnSettings" Clicked="Settings_Clicked" Text="Settings" Order="Secondary"/>
+        <ToolbarItem x:Name="btnAbout" Text="About Us" Order="Secondary" Clicked="btnAbout_Clicked"/>
     </TabbedPage.ToolbarItems>
 
     <local:PersonalNotePage Title="Personal Notes" Icon="personalNotes.png"/>

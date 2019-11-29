@@ -6,20 +6,21 @@
              BackgroundImage="background.png">
     <AbsoluteLayout>
         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
-            <Frame x:Name="btnTopAdd" HasShadow="True" CornerRadius="10" Padding="0" Margin="50,10" >
+            <Frame IsVisible="{Binding TableExist}" HasShadow="True" CornerRadius="10" Padding="0" Margin="50,10" >
                 <Button  Text="Create new Lyrics" 
                 x:Name="btnAddLyric"
                 Clicked="BtnAddLyric_Clicked"
                 TextColor="{StaticResource whiteColor}"     
                 BackgroundColor="{StaticResource pinkColor}"
-                       Image="Edit_pencil.png"/>
+           
+                Image="Edit_pencil.png"/>
             </Frame>
             <ListView x:Name="LyricsList" ItemSelected="LyricsList_ItemSelected"
               IsPullToRefreshEnabled="True" 
+              ItemsSource="{Binding Lyrics}"
               SeparatorVisibility="None"
               Refreshing="LyricsList_Refreshing"
               HasUnevenRows="True">
-
                 <ListView.ItemTemplate>
 
                     <DataTemplate >

@@ -13,10 +13,7 @@ namespace HandBook
         public MainPage()
         {
             InitializeComponent();
-   
-     
-        
-
+            
         }
     }
 }
