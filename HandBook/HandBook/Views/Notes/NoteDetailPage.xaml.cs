@@ -68,7 +68,7 @@ namespace HandBook
                     await DisplayAlert("Failed", "Notes have Failed to be Deleted", "Ok");
                 };
                 await Navigation.PopAsync();
-            }
+            }       
             else
             {
                 var continueEdit = await DisplayAlert("Continue ", "Do you want to Continue editing ?", "Yes", "No");
