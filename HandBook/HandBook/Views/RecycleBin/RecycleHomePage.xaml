@@ -4,6 +4,6 @@
              x:Class="HandBook.Views.RecycleBin.RecycleHomePage"
             Title="Recycle Bin" 
             xmlns:local="clr-namespace:HandBook.Views.RecycleBin">
-    <local:NoteBinPage Title="Note Bin"/>
+    <local:NoteBinPage Title="Notes Bin"/>
     
 </TabbedPage>

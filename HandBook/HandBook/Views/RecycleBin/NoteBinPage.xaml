@@ -3,13 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HandBook.Views.RecycleBin.NoteBinPage">
     <ListView x:Name="NotesList"
-              ItemTapped="NotesList_ItemTapped">
+              ItemsSource="{Binding Notes}"
+              ItemTapped="NotesList_ItemTapped" >
         <ListView.ItemTemplate>
             <DataTemplate>
-                <TextCell Text="{Binding Title}" Detail="{Binding PubDate}">
+                
+                <TextCell Text="{Binding Title}" 
+                          Detail="{Binding PubDate}" 
+                      
+                          CommandParameter="{Binding .}" >
+                    
                     <TextCell.ContextActions>
-                        <MenuItem Text="Delete Permanently" x:Name="btnDelete" Clicked="BtnDelete_Clicked" CommandParameter="{Binding .}"/>
+                        <MenuItem Text="Delete Permanently" 
+                                  x:Name="btnDelete" 
+                                  Clicked="btnDelete_Clicked"
+                                  Command="{Binding DeleteCommand}"
+                                  CommandParameter="{Binding .}"
+                                 />
                     </TextCell.ContextActions>
+                    
                 </TextCell>
             </DataTemplate>
         </ListView.ItemTemplate>

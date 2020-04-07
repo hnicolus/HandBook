@@ -1,48 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:HandBook"
-             x:Class="HandBook.ToDoPage"
-             BackgroundImage="background.png">
-    <StackLayout>
-        <Frame HasShadow="True" CornerRadius="10" Padding="0" Margin="50,10" >
-            <Button Text="Add new Task" TextColor="{StaticResource whiteColor}" 
-                    BackgroundColor="{StaticResource pinkColor}" 
-                    Image="Edit_pencil.png"
-                    x:Name="btnNewTask" Clicked="BtnNewTask_Clicked" />
-        </Frame>
-        <ListView x:Name="taskList" ItemSelected="TaskList_ItemSelected" 
-              IsPullToRefreshEnabled="True"
-              SeparatorVisibility="None"
-              Refreshing="TaskList_Refreshing" HasUnevenRows="True" Header="Tasks" >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell >
-                        <Frame Padding="10" Margin="20,10" HasShadow="True" CornerRadius="10" >
-                            <StackLayout Orientation="Horizontal" Padding="0,20" >
-                                <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="0,0,20,0" >
-                                    <Label Text="{Binding Title}" FontAttributes="Bold" VerticalTextAlignment="Center" />
-                              
-                                </StackLayout>
-                                <StackLayout>
-                                    <StackLayout HorizontalOptions="End" VerticalOptions="Center" Orientation="Horizontal" >
-                                        <Label Text="Completed :"/>
-                                        <Label x:Name="status" Text="{Binding Completed}" />
-                                    </StackLayout>
-                                </StackLayout>
-                            </StackLayout>
-                        </Frame>
-                        <ViewCell.ContextActions>
-                            <MenuItem Text="Completed" x:Name="btnCompleted" Clicked="BtnCompleted_Clicked" CommandParameter="{Binding .}"/>
-                            <MenuItem Text="Delete" IsDestructive="True" x:Name="btnDelete" CommandParameter="{Binding .}" Clicked="BtnDelete_Clicked" />
-                        </ViewCell.ContextActions>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <StackLayout x:Name="stackLayout" BackgroundColor="Yellow" VerticalOptions="FillAndExpand" Padding="0,0,0,0">
-            <Label Text="Banner Advertisement" HorizontalOptions="CenterAndExpand" TextColor="Green" FontSize="25" />
-            <local:AdBanner Size="Standardbanner" VerticalOptions="EndAndExpand"/>
-        </StackLayout>
-    </StackLayout>
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:local="clr-namespace:HandBook"
+			 xmlns:admob="clr-namespace:HandBook.Views.Admob"
+			 xmlns:syncfusion="clr-namespace:Syncfusion.SfSchedule.XForms;assembly=Syncfusion.SfSchedule.XForms"
+			 x:Class="HandBook.ToDoPage"
+			 BackgroundImage="background.png">
+	<StackLayout>
+		<Frame HasShadow="True" CornerRadius="10" Padding="0" Margin="50,10" >
+			<Button Text="Add new Task" TextColor="{StaticResource whiteColor}" 
+					BackgroundColor="{StaticResource pinkColor}" 
+					Image="Edit_pencil.png"
+					x:Name="btnNewTask" Clicked="BtnNewTask_Clicked" />
+		</Frame>
+		<Picker  Title="Calender View" x:Name="calenderViewOption" SelectedIndexChanged="calenderViewOption_SelectedIndexChanged" >
+			<Picker.Items>
+				<x:String>Day View</x:String>
+				<x:String>week View</x:String>
+				<x:String >Work Week View</x:String>
+				<x:String>Month View</x:String>
+				<x:String>Timeline View</x:String>
+			</Picker.Items>
+		</Picker>
+		<StackLayout >
+			<syncfusion:SfSchedule VerticalOptions="FillAndExpand"
+			x:Name="schedule" 
+			ScheduleView="MonthView"
+			ShowAppointmentsInline="True">
+			</syncfusion:SfSchedule>
+		</StackLayout>
+		<admob:AdmobView />
+	</StackLayout>
+
+
+
 </ContentPage>

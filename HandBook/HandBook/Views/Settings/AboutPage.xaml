@@ -4,10 +4,21 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="HandBook.Views.Settings.AboutPage">
+             x:Class="HandBook.Views.Settings.AboutPage" NavigationPage.HasNavigationBar="False" >
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="About Page"/>
+        <StackLayout Padding="20">
+            <ListView ItemsSource="{Binding AppPolicies}" x:Name="AppInfoList" ItemSelected="ListView_ItemSelected" ItemTapped="ListView_ItemTapped" HasUnevenRows="True" SeparatorVisibility="None" VerticalScrollBarVisibility="Never">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding Title}" FontSize="Title" FontAttributes="Bold" />
+                                <Label Text="{Binding Body}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

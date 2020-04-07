@@ -1,12 +1,16 @@
-﻿using SQLite;
+﻿using HandBook.Core.Functions;
+using SQLite;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace HandBook.Models
 {
-    public class Post
+    public class Post 
     {
+
+
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
@@ -14,12 +18,10 @@ namespace HandBook.Models
         public string Title { get; set; }
         public  DateTime PubDate { get; set; } 
         public bool IsFavourite { get; set; }
-        public bool IsDeleted;
 
-        public bool Deleted
-        {
-            get => IsDeleted;
-            set =>  IsDeleted = value;
-        }
+
+        public bool IsDeleted { get;set; }
+
+
     }
 }

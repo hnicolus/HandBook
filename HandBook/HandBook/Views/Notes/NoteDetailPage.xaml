@@ -1,29 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:admob="clr-namespace:HandBook.Views.Admob"
              x:Class="HandBook.NoteDetailPage" BackgroundImage="background.png" >
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Delete" x:Name="btnDelete" Clicked="BtnDelete_Clicked" IsDestructive="True" />
+        <ToolbarItem Text="Edit" x:Name="btnSave" Command="{Binding EditCommand}" />
+        <ToolbarItem x:Name="readSpeach"  Text="Read" 
+                     IconImageSource="speaker.png" 
+                     Command="{Binding ReadCommand}"
+                     Order="Primary" />
+        
+        <ToolbarItem Text="Delete" x:Name="btnDelete" 
+                     Command="{Binding DeleteCommand}"
+                     IsDestructive="True" Order="Secondary"/>
+        
+        <ToolbarItem  x:Name="shareText" Command="{Binding ShareTextCommand}" Order="Primary" IconImageSource="share.png"/>
+        <ToolbarItem Text="Copy to clipboard" x:Name="btnCopyAll" Command="{Binding CopyAllCommand}" Order="Secondary"/>
+        <ToolbarItem Text="Export to file" Command="{Binding SaveToFileCommand}" x:Name="btnSaveToTxt"  Order="Secondary"  />
 
-        <ToolbarItem Text="Copy" x:Name="btnCopyAll" Clicked="btnCopyAll_Clicked"/>
-        <ToolbarItem Text="Export to file" x:Name="btnSaveToTxt" Clicked="btnSaveToTxt_Clicked" Order="Secondary"  />
-        <ToolbarItem Text="Edit" x:Name="btnSave" Clicked="BtnEdit_Clicked" />
     </ContentPage.ToolbarItems>
-    <ScrollView>
-        <StackLayout Spacing="0">
+    <AbsoluteLayout >
+        <ScrollView Grid.Row="0" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
+            <StackLayout  Spacing="0" VerticalOptions="FillAndExpand" BindingContext="{Binding Note}"  >
 
-            <Frame HasShadow="True"  CornerRadius="0" Padding="10">
-                <StackLayout Orientation="Vertical" >
-                    <Label Text="{Binding Title}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center"  FontSize="Large"  />
-                    <Label Text="{Binding PubDate, StringFormat='{0:dd MMM yyyy}'}" />
-                </StackLayout>
-            </Frame>
-            <Frame HasShadow="False"  CornerRadius="0" VerticalOptions="FillAndExpand">
-                <StackLayout>
-                    <Label Text="{Binding Body}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
-                </StackLayout>
-            </Frame>
-
-        </StackLayout>
-    </ScrollView>
+                <Frame HasShadow="True"  CornerRadius="0" Padding="10">
+                    <StackLayout Orientation="Vertical" >
+                        <Label Text="{Binding Title}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center"  FontSize="Large"  />
+                        <Label Text="{Binding PubDate, StringFormat='{0:dd MMM yyyy}'}" />
+                    </StackLayout>
+                </Frame>
+                <Frame HasShadow="False"  CornerRadius="0" VerticalOptions="FillAndExpand">
+                    <StackLayout>
+                        <Label Text="{Binding Body}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
+                </Frame>
+                <admob:AdmobView HeightRequest="50" BackgroundColor="Transparent"/>
+            </StackLayout>
+        </ScrollView>
+    </AbsoluteLayout>
 </ContentPage>

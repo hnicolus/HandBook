@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:admob="clr-namespace:HandBook.Views.Admob"
              x:Class="HandBook.LyricDetailPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text=" Mark as Favourite " x:Name="btnFavourite" Order="Secondary" Clicked="BtnFavourite_Clicked"/>
@@ -9,8 +10,14 @@
         <ToolbarItem Text="Edit"  x:Name="btnEdit" Clicked="BtnEdit_Clicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="6*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <ScrollView>
+
+            <StackLayout Grid.Row="0" Padding="10">
                 <StackLayout>
                     <Label Text="Title :" FontAttributes="Bold"  />
                     <Label  Text="{Binding Title}" />
@@ -20,11 +27,14 @@
                     <Label Text="{Binding Chorus}" />
                 </StackLayout>
 
-                <StackLayout>
+                <StackLayout VerticalOptions="FillAndExpand">
                     <Label Text="Verse :" FontAttributes="Bold"  />
                     <Label Text="{Binding Verse}"/>
                 </StackLayout>
-            </StackLayout>
+                </StackLayout>
+
         </ScrollView>
+        <admob:AdmobView Grid.Row="1" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

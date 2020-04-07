@@ -1,6 +1,5 @@
 ﻿using HandBook.Models;
 using HandBook.ViewModels;
-
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,13 +15,13 @@ namespace HandBook
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PersonalNotePage : ContentPage
     {
-        private new NotesViewModel Content;
+        private NotesViewModel ctx ;
         public PersonalNotePage()
         {
+            
             InitializeComponent ();
-            Content = new NotesViewModel();
-            Refresh();
 
+            Refresh();
         }
 
         protected override void OnAppearing()
@@ -32,30 +31,17 @@ namespace HandBook
         }
 
 
-        //Fetch  all items with isdeleted flg set to false
+        //Fetch  all items with is deleted flg set to false
         private void Refresh()
         {
-            Content.FetchList();
-
-             var notes = Content.Notes.Where(b => b.IsDeleted == false).ToList();
-             
-             btnTopAdd.IsVisible = Content.TableExists();
-            notesList.ItemsSource = notes
-                .Where(b => b.IsDeleted == false)
-                .OrderByDescending(b => b.Id);
-            
-            
+            ctx = new NotesViewModel();
+            BindingContext = ctx;  
         }
 
         //Selected Item
         private void NotesList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            Note selectedNote = notesList.SelectedItem as Note;
-
-            if(selectedNote != null)
-            {
-                Navigation.PushAsync(new NoteDetailPage(selectedNote));
-            };
+            notesList.SelectedItem = null;
         }
 
         //Delete an item
@@ -68,8 +54,10 @@ namespace HandBook
             var response = await DisplayAlert("Warning", "Are you sure you want to delete this item ?", "Yes", "No");
             if (response)
             {
-               var notDeleted = DataAccess.Delete(note);
-                if (notDeleted)
+                note.IsDeleted = true;
+
+             var noteUpdated = DataAccess.Update(note);
+                if (note.IsDeleted)
                 {
                     await DisplayAlert("Success", "Notes have been successfully Deleted", "Ok");
                 }
@@ -91,6 +79,17 @@ namespace HandBook
        private async void BtnNewNote_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new NewNotesPage());
+        }
+
+        private void notesList_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            Note selectedNote = e.Item as Note;
+
+            if (selectedNote != null)
+            {
+                Navigation.PushAsync(new NoteDetailPage(selectedNote.Id));
+            };
+
         }
     }
 }

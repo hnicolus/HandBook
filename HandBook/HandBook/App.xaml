@@ -1,11 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"   
+       
              x:Class="HandBook.App">
     <Application.Resources>
 
         <ResourceDictionary>
-            <Color x:Key="pinkColor">#F01CFF</Color>
+           
+            <Color x:Key="pinkColor">#db0494</Color>
             <Color x:Key="BlueColor" >#072A62</Color>
             <Color x:Key="greyColor" >#6F7492</Color>
             <Color x:Key="whiteColor" >#FFFFFF</Color>
@@ -13,31 +15,41 @@
             <Color x:Key="lightestBlueColor">#1CACFF</Color>
             <Color x:Key="lightBlueColor">#1C8EFF</Color>
 
-            <!--<Style TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{StaticResource pinkColor}"/>
-                <Setter Property="TextColor"  Value="{StaticResource whiteColor}"/>
-                <Setter Property="CornerRadius" Value="10"/>
-
-            </Style>
-            <Style x:Key="pinkButton" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{StaticResource pinkColor}"/>
-                <Setter Property="TextColor"  Value="{StaticResource whiteColor}"/>
-                <Setter Property="CornerRadius" Value="10"/>
-
-            </Style>
-            <Style x:Key="blueButton" TargetType="Button">
-                <Setter Property="BorderRadius" Value="10"/>
-                <Setter Property="CornerRadius" Value="10"/>
-                <Setter Property="BackgroundColor" Value="{StaticResource blueColor }"/>
-                <Setter Property="TextColor" Value="{StaticResource whiteColor}"/>
+            <!--<Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="LineHeight" Value="{OnPlatform Android=1.25,Default=-1}"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-White}"/>
             </Style>
 
-            <Style x:Key="greyButton" TargetType="Button">
-                <Setter Property="BorderRadius" Value="10"/>
-                <Setter Property="CornerRadius" Value="10"/>
-                <Setter Property="BackgroundColor" Value="{StaticResource greyColor }"/>
-                <Setter Property="TextColor" Value="{StaticResource whiteColor}"/>
+            --><!--Common button style--><!--
+            <Style x:Key="SfButtonStyle" TargetType="buttons:SfButton">
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                <Setter Property="VerticalOptions" Value="EndAndExpand"/>
+                <Setter Property="Margin" Value="0,10,0,24"/>
+                <Setter Property="CornerRadius" Value="20"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="WidthRequest" Value="245"/>
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="FontFamily" Value="{StaticResource Montserrat-SemiBold}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource Gray-White}"/>
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}"/>
+            </Style>
+
+            <Style x:Key="SfGradientViewStyle" TargetType="gradient:SfGradientView">
+                <Setter Property="BackgroundBrush">
+                    <Setter.Value>
+                        <gradient:SfLinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <gradient:SfLinearGradientBrush.GradientStops>
+                                <gradient:SfGradientStop Color="#072A62" Offset="0.0" />
+                                <gradient:SfGradientStop Color="#1CACFF" Offset="1.0" />
+                            </gradient:SfLinearGradientBrush.GradientStops>
+                        </gradient:SfLinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
             </Style>-->
+            
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

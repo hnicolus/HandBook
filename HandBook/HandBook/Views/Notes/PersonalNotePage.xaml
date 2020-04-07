@@ -2,67 +2,85 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:HandBook"
-             xmlns:local1="clr-namespace:HandBook.CustomRenders"
+             xmlns:admob="clr-namespace:HandBook.Views.Admob"
              x:Class="HandBook.PersonalNotePage" BackgroundImage="background.png">
     <AbsoluteLayout>
-        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
-            <Frame x:Name="btnTopAdd" HasShadow="True" CornerRadius="10" Padding="0" Margin="50,10" >
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                     AbsoluteLayout.LayoutFlags="All" >
+            <Frame x:Name="btnTopAdd" HasShadow="True" 
+                   IsVisible="{Binding TableExists}"
+                   CornerRadius="10" Padding="0" Margin="50,10" >
                 <Button  Text="Add new Note" 
                 x:Name="btnNewNote"
                 Clicked="BtnNewNote_Clicked"
-                TextColor="{StaticResource whiteColor}"     
-                BackgroundColor="{StaticResource BlueColor}"
+        TextColor="{StaticResource whiteColor}"     
+                BackgroundColor="{StaticResource pinkColor}"
                        Image="Edit_pencil.png"/>
             </Frame>
-            <ListView x:Name="notesList" ItemSelected="NotesList_ItemSelected" 
+            <ListView x:Name="notesList" ItemSelected="NotesList_ItemSelected"  
+                      ItemTapped="notesList_ItemTapped"
+                      ItemsSource="{Binding Notes}" 
               IsPullToRefreshEnabled="True" 
               SeparatorVisibility="None"
               Refreshing="NotesList_Refreshing"
               HasUnevenRows="True" >
-
                 <ListView.ItemTemplate>
-
                     <DataTemplate >
-
                         <ViewCell >
                             <AbsoluteLayout Margin="5,5" >
-                                <Frame BackgroundColor="{StaticResource lightBlueColor}"  HasShadow="True" Margin="10,20,10,0"
+                                <Frame BackgroundColor="{StaticResource lightBlueColor}"  
+                                       HasShadow="True" Margin="10,20,10,0"
                                    CornerRadius="20"
                                    TabIndex="0"
-                                    AbsoluteLayout.LayoutBounds="0,0,0.95,150" AbsoluteLayout.LayoutFlags="WidthProportional" >
-                                    <StackLayout HorizontalOptions="StartAndExpand" Padding="0,30,0,0" >
-                                        <Label x:Name="bodyText"   Text="{Binding Body}" TextColor="{StaticResource whiteColor}"/>
+                                    AbsoluteLayout.LayoutBounds="0,0,0.95,150"
+                                       AbsoluteLayout.LayoutFlags="WidthProportional" >
+                                    <StackLayout HorizontalOptions="StartAndExpand"
+                                                 Padding="0,30,0,0" >
+                                        <Label x:Name="bodyText"  
+                                               Text="{Binding ShortDetails}" 
+                                               TextColor="{StaticResource whiteColor}"/>
                                     </StackLayout>
                                 </Frame>
-                                <Frame BackgroundColor="{StaticResource lightestBlueColor}"  CornerRadius="20" Padding="0" HasShadow="True" 
-                                   AbsoluteLayout.LayoutBounds="0,0,1,50"  AbsoluteLayout.LayoutFlags="WidthProportional" HeightRequest="10" TabIndex="1"  >
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding Title}" VerticalTextAlignment="Center"  HorizontalOptions="CenterAndExpand" TextColor="{StaticResource whiteColor}" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-                                        <ImageButton BackgroundColor="Transparent" HorizontalOptions="End" Margin="0,0,20,0"  Source="Edit_pencil.png"/>
+                                <Frame BackgroundColor="{StaticResource lightestBlueColor}"
+                                       CornerRadius="20" Padding="0" HasShadow="True" 
+                                   AbsoluteLayout.LayoutBounds="0,0,1,50"  
+                                       AbsoluteLayout.LayoutFlags="WidthProportional"
+                                       HeightRequest="10" TabIndex="1"  >
+                                    <StackLayout Orientation="Horizontal"> 
+                                        <Label Text="{Binding Title}" VerticalTextAlignment="Center"
+                                               HorizontalOptions="CenterAndExpand"
+                                               TextColor="{StaticResource whiteColor}" 
+                                               FontAttributes="Bold" 
+                                               HorizontalTextAlignment="Center"/>
+                                        <ImageButton BackgroundColor="Transparent"
+                                                     HorizontalOptions="End" Margin="0,0,20,0" 
+                                                     Source="Edit_pencil.png"/>
                                     </StackLayout>
                                 </Frame>
                             </AbsoluteLayout>
                             <ViewCell.ContextActions>
-                                <MenuItem x:Name="btnDelete" Text="Delete" IsDestructive="True"  Clicked="BtnDelete_Clicked" CommandParameter="{Binding .}"/>
+                                <MenuItem x:Name="btnDelete" Text="Delete" IsDestructive="True"  
+                                          Command="{Binding DeleteCommand}"
+                                          CommandParameter="{Binding .}"/>
                             </ViewCell.ContextActions>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <StackLayout
-                
-                x:Name="stackLayout" BackgroundColor="Yellow" VerticalOptions="FillAndExpand" Padding="0,0,0,0">
-                <Label Text="Banner Advertisement" HorizontalOptions="CenterAndExpand" TextColor="Green" FontSize="25" />
-
-
+            <StackLayout x:Name="stackLayout" BackgroundColor="Transparent" 
+                         VerticalOptions="FillAndExpand" Padding="0,0,0,0">
+                <admob:AdmobView HeightRequest="50"/>
             </StackLayout>
         </StackLayout>
         <Frame CornerRadius="100" HasShadow="True" AbsoluteLayout.LayoutBounds="1,1,70,70" 
                Margin="0,0,10,10"
                AbsoluteLayout.LayoutFlags="PositionProportional" 
                BackgroundColor="{StaticResource BlueColor}">
-            <ImageButton Source="Edit_pencil.png" Aspect="Fill" BackgroundColor="Transparent"   x:Name="btnFloatNewNote"
+            <ImageButton Source="Edit_pencil.png" Aspect="Fill" 
+                         BackgroundColor="Transparent"   
+                         x:Name="btnFloatNewNote"
                 Clicked="BtnNewNote_Clicked" />
         </Frame>
+        
     </AbsoluteLayout>
 </ContentPage>

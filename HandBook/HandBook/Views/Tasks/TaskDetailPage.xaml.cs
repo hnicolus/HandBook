@@ -22,7 +22,7 @@ namespace HandBook
 			BindingContext = selectedTask ;
 		}
 
-		async private void btnDelete_Clicked(object sender, EventArgs e)
+		private async void btnDelete_Clicked(object sender, EventArgs e)
 		{
 
 			using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
@@ -49,7 +49,7 @@ namespace HandBook
 			}
 		}
 
-		async private void BtnSave_Clicked(object sender, EventArgs e)
+		 private async void BtnSave_Clicked(object sender, EventArgs e)
 		{
 			selectedTask.Title = txtTitle.Text;
 			selectedTask.Notify = txtNotify.On;

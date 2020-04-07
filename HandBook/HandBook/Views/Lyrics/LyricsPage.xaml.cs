@@ -66,20 +66,23 @@ namespace HandBook
             await Navigation.PushAsync(new EditLyricPage());
         }
 
-       private async void LyricsList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        void LyricsList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-
-            if (LyricsList.SelectedItem is Lyric selectedLyric)
-            {
-                await Navigation.PushAsync(new LyricDetailPage(selectedLyric));
-                LyricsList.SelectedItem = null;
-            }
+            LyricsList.SelectedItem = null;
         }
 
         private void LyricsList_Refreshing(object sender, EventArgs e)
         {
             Refresh();
             LyricsList.EndRefresh();
+        }
+
+        private async void LyricsList_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var selectedLyric = e.Item as Lyric;
+
+                await Navigation.PushAsync(new LyricDetailPage(selectedLyric));
+                LyricsList.SelectedItem = null;
         }
     }
 }

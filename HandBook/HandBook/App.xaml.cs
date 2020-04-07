@@ -1,4 +1,5 @@
-﻿using System;
+
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,11 +8,14 @@ namespace HandBook
 {
     public partial class App : Application
     {
+        public static string BaseImageUrl { get; } = "https://cdn.syncfusion.com/essential-ui-kit-for-xamarin.forms/common/uikitimages/";
 
         public static string DatabaseLocation = string.Empty;
 
         public App()
         {
+
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjIzMDMxQDMxMzcyZTM0MmUzMG5jQTZrSE1PVlNWNGlaY0xmMWFKUHJyVlN5M0JrSE1vRkordHhOUHpkOGs9");
             InitializeComponent();
 
             MainPage = new NavigationPage(new HomePage());
@@ -19,6 +23,8 @@ namespace HandBook
         }
         public App(string databaseLocation)
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjIzMDMxQDMxMzcyZTM0MmUzMG5jQTZrSE1PVlNWNGlaY0xmMWFKUHJyVlN5M0JrSE1vRkordHhOUHpkOGs9");
+
             DatabaseLocation = databaseLocation;
             InitializeComponent();
             MainPage = new NavigationPage(new HomePage());

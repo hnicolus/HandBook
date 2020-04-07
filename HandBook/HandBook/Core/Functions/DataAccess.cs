@@ -1,24 +1,37 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using HandBook.Models;
 using SQLite;
 
 namespace HandBook.Core.Functions
 {
-    internal class DataAccess
+    internal abstract class DataAccess
     {
 
         #region Notes CRUD Code Block
-        public static List<Note> LoadNotes()
+
+        public static Note GetNoteById(int id)
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
             {
+              
                 conn.CreateTable<Note>();
-                var notes = conn.Table<Note>().ToList();
+                var note = conn.Table<Note>().Where(b => b.Id == id).SingleOrDefault();
 
-                return notes;
+                return note;
             }
-
+        }
+        public static List<Note> LoadNotes()
+        {
+            List<Note> notes;
+            
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+            {
+                conn.CreateTable<Note>();
+                notes = conn.Table<Note>().ToList();
+            }
+            return notes;
         }
 
         //Updates an item in Database
@@ -61,7 +74,7 @@ namespace HandBook.Core.Functions
         }
         #endregion
 
-        #region Lyrics  CRUD Code Block
+#region Lyrics  CRUD Code Block
 
 
 #pragma warning disable 1998
@@ -101,7 +114,6 @@ namespace HandBook.Core.Functions
                 return (rows > 0);
             }
         }
-
 
         public static bool Delete(Lyric item)
         {

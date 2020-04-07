@@ -1,13 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        xmlns:admob="clr-namespace:HandBook.Views.Admob"
              x:Class="HandBook.EditLyricPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="btnDelete" Text="Delete" Clicked="BtnDelete_Clicked"/>
         <ToolbarItem Text="Save"  x:Name="btnUpdate" Clicked="BtnUpdate_Clicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <ScrollView>
+        <Grid RowSpacing="0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <ScrollView>
+
             <StackLayout BackgroundColor="{StaticResource lightBlueColor}">
                 <Frame>
                     <StackLayout   >
@@ -19,18 +26,28 @@
                     <StackLayout>
                         <Label Text="Genre" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start"/>
                         <Entry x:Name="txtGenre" Text="{Binding Genre}" Placeholder="Genre"/>
-                    </StackLayout>
+                           
+                        </StackLayout>
                 </Frame>
                 <Frame VerticalOptions="FillAndExpand" HasShadow="True"  HeightRequest="150">
                     <StackLayout >
                         <Label Text="Chorus :" VerticalOptions="Center" HorizontalOptions="Start" FontAttributes="Bold"/>
                         <Editor x:Name="txtChorus" Text="{Binding Chorus}" Placeholder="Chorus" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
-                    </StackLayout>
+                            
+                        </StackLayout>
                 </Frame>
                 <Frame VerticalOptions="FillAndExpand" HasShadow="True" HeightRequest="400">
-                    <Editor x:Name="txtVerse" Text="{Binding Verse}" Placeholder="Verses" />
+                        <StackLayout>
+                            <Label Text="Verse :" VerticalOptions="Center" HorizontalOptions="Start" FontAttributes="Bold"/>
+                            <Editor x:Name="txtVerse" VerticalOptions="FillAndExpand" Text="{Binding Verse}" Placeholder="Verses" />
+                           
+                        </StackLayout>
                 </Frame>
-            </StackLayout>
+                   
+                </StackLayout>
+          
         </ScrollView>
+        <admob:AdmobView Grid.Row="1" HeightRequest="50" BackgroundColor="Transparent" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

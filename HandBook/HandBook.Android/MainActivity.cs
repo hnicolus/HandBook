@@ -15,17 +15,27 @@ namespace HandBook.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjIzMDMxQDMxMzcyZTM0MmUzMG5jQTZrSE1PVlNWNGlaY0xmMWFKUHJyVlN5M0JrSE1vRkordHhOUHpkOGs9");
+  
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-            Android.Gms.Ads.MobileAds.Initialize(ApplicationContext, "ca-app-pub-5780847061911787/9892180588");
+
+     
+
+            Android.Gms.Ads.MobileAds.Initialize(ApplicationContext, "ca-app-pub-5780847061911787~3737835778");
+
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
 
             string  dbName= "handBook_db.sqlite";
             string folderfPath =System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             string FullPath = Path.Combine(folderfPath, dbName);
             LoadApplication(new App(FullPath));
+            Window.SetSoftInputMode(Android.Views.SoftInput.AdjustResize);
+
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

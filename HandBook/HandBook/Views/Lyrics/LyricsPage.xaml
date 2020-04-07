@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:HandBook"
+             xmlns:admob="clr-namespace:HandBook.Views.Admob"
              x:Class="HandBook.LyricsPage"
              BackgroundImage="background.png">
     <AbsoluteLayout>
@@ -19,6 +20,7 @@
               IsPullToRefreshEnabled="True" 
               ItemsSource="{Binding Lyrics}"
               SeparatorVisibility="None"
+              ItemTapped="LyricsList_ItemTapped"
               Refreshing="LyricsList_Refreshing"
               HasUnevenRows="True">
                 <ListView.ItemTemplate>
@@ -32,7 +34,7 @@
                                    TabIndex="0"
                                     AbsoluteLayout.LayoutBounds="0,0,0.95,150" AbsoluteLayout.LayoutFlags="WidthProportional" >
                                     <StackLayout HorizontalOptions="StartAndExpand" Padding="80,20,0,0" >
-                                        <Label   Text="{Binding Chorus}" TextColor="{StaticResource whiteColor}"/>
+                                        <Label   Text="{Binding ShortDetails}" TextColor="{StaticResource whiteColor}"/>
                                     </StackLayout>
                                 </Frame>
                                 <Frame BackgroundColor="{StaticResource pinkColor}" Margin="0,10,0,0" 
@@ -58,9 +60,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <StackLayout x:Name="stackLayout" BackgroundColor="Yellow" VerticalOptions="FillAndExpand" Padding="0,0,0,0">
-                <Label Text="Banner Advertisement" HorizontalOptions="CenterAndExpand" TextColor="Green" FontSize="25" />
-                <local:AdBanner Size="Standardbanner" VerticalOptions="EndAndExpand"/>
+            <StackLayout x:Name="stackLayout" BackgroundColor="Transparent" VerticalOptions="FillAndExpand" Padding="0,0,0,0">
+                <admob:AdmobView />
             </StackLayout>
         </StackLayout>
         <Frame CornerRadius="100" HasShadow="True" AbsoluteLayout.LayoutBounds="1,1,70,70" 

@@ -3,17 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HandBook.HomePage"
             Title="HandBook"
-            xmlns:local="clr-namespace:HandBook">
+            xmlns:local="clr-namespace:HandBook"
+            xmlns:noteslist="clr-namespace:HandBook.Views.NotesList">
 
     <TabbedPage.ToolbarItems>
-     
-        <!--<ToolbarItem x:Name="btnBin" Text="Recycle Bin" Order="Secondary" Clicked="BtnBin_Clicked" />-->
-        <ToolbarItem x:Name="btnSettings" Clicked="Settings_Clicked" Text="Settings" Order="Secondary"/>
+
+        <ToolbarItem x:Name="btnBin" Text="Recycle Bin" Order="Secondary" Clicked="BtnBin_Clicked" />
+        <!--<ToolbarItem x:Name="btnSettings" Clicked="Settings_Clicked" Text="Settings" Order="Secondary"/>-->
+        <ToolbarItem x:Name="Share" Text="Share App" Order="Secondary" Clicked="Share_Clicked"/>
+        <ToolbarItem x:Name="GetMoreApps" Text="Get more Apps" Order="Secondary" Clicked="GetMoreApps_Clicked"/>
+        <ToolbarItem  x:Name="btnTermsNConditions" Text="Terms And Conditions" Order="Secondary" Clicked="btnTermsNConditions_Clicked"/>
         <ToolbarItem x:Name="btnAbout" Text="About Us" Order="Secondary" Clicked="btnAbout_Clicked"/>
     </TabbedPage.ToolbarItems>
-
     <local:PersonalNotePage Title="Personal Notes" Icon="personalNotes.png"/>
     <local:LyricsPage Title="Music Lyrics" Icon="musicLyrics.png"/>
-    <local:ToDoPage Title="ToDo List" Icon="toDoList.png" />
+    <!--<local:ToDoPage Title="ToDo List" Icon="toDoList.png" />-->
     
 </TabbedPage>
