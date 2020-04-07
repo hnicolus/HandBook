@@ -8,41 +8,68 @@ using System.Threading.Tasks;
 using HandBook.Core.Functions;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using System.Windows.Input;
+using System.Collections.ObjectModel;
 
 namespace HandBook.ViewModels
 {
     class NotesViewModel : BaseViewModel
     {
-        #region Fileds
+        #region Fields
         Page page = App.Current.MainPage;
         private List<Note> notes;
+        private readonly IPageService pageService;
         #endregion
 
         #region Properties
+        public Note SelectedNote { get; set; }
         public Note Note { get; set; }
-        public List<Note> Notes { get; set; }
+        public List<Note> Notes 
+        { 
+            get =>notes;
+            private set
+            {
+                if (notes == value)
+                    return;
+                notes = value;
+                NotifyPropertyChanged();
+
+            }
+        }
         #endregion
 
         #region Commands
-        public Command DeleteCommand { get; set; }
+        public ICommand DeleteNoteCommand { get; private  set; }
+        public Command AddCommand { get; set; }
         #endregion
 
         #region Constructors
 
-        public NotesViewModel()
+        public NotesViewModel(IPageService pageService)
         {
             notes = new List<Note>();
 
-            DeleteCommand = new Command(OnDeleteButtonClicked);
+            DeleteNoteCommand = new Command<Note>(async n => await OnDeleteButtonClicked(n as Note));
+            AddCommand = new Command(AddNewNote);
             FetchList();
+            this.pageService = pageService;
         }
 
-        private async void OnDeleteButtonClicked(object obj)
+        private async void AddNewNote(object obj)
         {
-            var menuItem = obj as MenuItem;
+            await page.Navigation.PushAsync(new NewNotesPage());
+        }
 
-            var note = menuItem.CommandParameter as Note;
-
+        public void TappedItem(Note note)
+        {
+            if (note == null)
+                return;
+            page.Navigation.PushAsync(new NoteDetailPage(note.Id));
+          
+        }
+        public async Task OnDeleteButtonClicked(Note note)
+        {
+ 
             var response = await page.DisplayAlert("Warning", "Are you sure you want to delete this item ?", "Yes", "No");
             if (response)
             {
@@ -52,14 +79,14 @@ namespace HandBook.ViewModels
                 if (note.IsDeleted)
                 {
                     await page.DisplayAlert("Success", "Notes have been successfully Deleted", "Ok");
+                 
                 }
                 else
                 {
                     await page.DisplayAlert("Failed", "Notes have Failed to be Deleted", "Ok");
                 };
-
+                FetchList();
             }
-            FetchList();
         }
 
         public NotesViewModel(int id)
@@ -69,14 +96,9 @@ namespace HandBook.ViewModels
         }
         #endregion
 
-
-
-
         //fetch Data from database
-        public List<Note> FetchList()=> Notes =  DataAccess
-            .LoadNotes()
-            .Where(b => b.IsDeleted == false)
-            .ToList();
+        public void FetchList()=>
+            Notes = DataAccess.LoadNotes().Where(b => b.IsDeleted == false).ToList();
         
         public bool TableExists
         { 

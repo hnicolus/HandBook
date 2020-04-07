@@ -34,7 +34,8 @@ namespace HandBook
         //Fetch  all items with is deleted flg set to false
         private void Refresh()
         {
-            ctx = new NotesViewModel();
+            ctx = null;
+            ctx = new NotesViewModel(new PageService());
             BindingContext = ctx;  
         }
 
@@ -45,28 +46,12 @@ namespace HandBook
         }
 
         //Delete an item
-        private async void BtnDelete_Clicked(object sender, EventArgs e)
+        private async  void BtnDelete_Clicked(object sender, EventArgs e)
         {
             var menuItem = sender as MenuItem;
 
             var note = menuItem.CommandParameter as Note;
-
-            var response = await DisplayAlert("Warning", "Are you sure you want to delete this item ?", "Yes", "No");
-            if (response)
-            {
-                note.IsDeleted = true;
-
-             var noteUpdated = DataAccess.Update(note);
-                if (note.IsDeleted)
-                {
-                    await DisplayAlert("Success", "Notes have been successfully Deleted", "Ok");
-                }
-                else
-                {
-                    await DisplayAlert("Failed", "Notes have Failed to be Deleted", "Ok");
-                };
-               
-            }
+            await (BindingContext as NotesViewModel).OnDeleteButtonClicked(note);
             Refresh();
         }
 
@@ -75,20 +60,15 @@ namespace HandBook
             Refresh();
             notesList.EndRefresh(); 
         }
-
-       private async void BtnNewNote_Clicked(object sender, EventArgs e)
+        private void CreateNewNote(object sender, ItemTappedEventArgs e)
         {
-            await Navigation.PushAsync(new NewNotesPage());
+            (BindingContext as NotesViewModel).AddCommand.Execute(sender);
         }
-
         private void notesList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             Note selectedNote = e.Item as Note;
+            (BindingContext as NotesViewModel).TappedItem(selectedNote);
 
-            if (selectedNote != null)
-            {
-                Navigation.PushAsync(new NoteDetailPage(selectedNote.Id));
-            };
 
         }
     }

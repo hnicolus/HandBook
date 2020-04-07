@@ -11,15 +11,15 @@
                    IsVisible="{Binding TableExists}"
                    CornerRadius="10" Padding="0" Margin="50,10" >
                 <Button  Text="Add new Note" 
-                x:Name="btnNewNote"
-                Clicked="BtnNewNote_Clicked"
+                x:Name="btnNewNote" Command="{Binding AddCommand}"
+               
         TextColor="{StaticResource whiteColor}"     
                 BackgroundColor="{StaticResource pinkColor}"
                        Image="Edit_pencil.png"/>
             </Frame>
             <ListView x:Name="notesList" ItemSelected="NotesList_ItemSelected"  
                       ItemTapped="notesList_ItemTapped"
-                      ItemsSource="{Binding Notes}" 
+                      ItemsSource="{Binding Notes,Mode=TwoWay}" 
               IsPullToRefreshEnabled="True" 
               SeparatorVisibility="None"
               Refreshing="NotesList_Refreshing"
@@ -60,7 +60,7 @@
                             </AbsoluteLayout>
                             <ViewCell.ContextActions>
                                 <MenuItem x:Name="btnDelete" Text="Delete" IsDestructive="True"  
-                                          Command="{Binding DeleteCommand}"
+                                          Clicked="BtnDelete_Clicked"
                                           CommandParameter="{Binding .}"/>
                             </ViewCell.ContextActions>
                         </ViewCell>
@@ -77,9 +77,10 @@
                AbsoluteLayout.LayoutFlags="PositionProportional" 
                BackgroundColor="{StaticResource BlueColor}">
             <ImageButton Source="Edit_pencil.png" Aspect="Fill" 
+                         Command="{Binding AddCommand}"
                          BackgroundColor="Transparent"   
                          x:Name="btnFloatNewNote"
-                Clicked="BtnNewNote_Clicked" />
+                />
         </Frame>
         
     </AbsoluteLayout>
