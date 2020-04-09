@@ -10,7 +10,10 @@ namespace HandBook.Models
     public class Post 
     {
 
-
+        public Post()
+        {
+            PubDate = DateTime.Now;
+        }
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
@@ -19,7 +22,9 @@ namespace HandBook.Models
         public  DateTime PubDate { get; set; } 
         public bool IsFavourite { get; set; }
 
+        public string BackgroundGradientStart { get; set; }
 
+        public string BackgroundGradientEnd { get; set; }
         public bool IsDeleted { get;set; }
 
 

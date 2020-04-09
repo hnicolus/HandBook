@@ -2,8 +2,32 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:HandBook"
+             xmlns:cards="clr-namespace:Syncfusion.XForms.Cards;assembly=Syncfusion.Cards.XForms"
+             xmlns:controls="clr-namespace:HandBook.Controls"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:ListView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:ViewModel="clr-namespace:HandBook.ViewModels.Notes"
+             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
              xmlns:admob="clr-namespace:HandBook.Views.Admob"
-             x:Class="HandBook.PersonalNotePage" BackgroundImage="background.png">
+             NavigationPage.HasNavigationBar="False"
+             x:Class="HandBook.PersonalNotePage" >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="titleLayout" Spacing="0">
+                <controls:TitleView Title="My Notes">
+                </controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
     <AbsoluteLayout>
         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" 
                      AbsoluteLayout.LayoutFlags="All" >
@@ -26,38 +50,75 @@
               HasUnevenRows="True" >
                 <ListView.ItemTemplate>
                     <DataTemplate >
-                        <ViewCell >
+                        <ViewCell  >
                             <AbsoluteLayout Margin="5,5" >
-                                <Frame BackgroundColor="{StaticResource lightBlueColor}"  
+                                    <Frame BackgroundColor="{StaticResource lightBlueColor}"  
                                        HasShadow="True" Margin="10,20,10,0"
                                    CornerRadius="20"
                                    TabIndex="0"
-                                    AbsoluteLayout.LayoutBounds="0,0,0.95,150"
-                                       AbsoluteLayout.LayoutFlags="WidthProportional" >
-                                    <StackLayout HorizontalOptions="StartAndExpand"
+                                           Padding="0"
+                                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                       AbsoluteLayout.LayoutFlags="All" >
+                                        <StackLayout>
+                                            <Grid>
+                                                <gradient:SfGradientView>
+                                                    <gradient:SfGradientView.BackgroundBrush>
+                                                        <gradient:SfLinearGradientBrush>
+                                                            <gradient:SfLinearGradientBrush.GradientStops>
+                                                                <gradient:SfGradientStop Color="#d56381" Offset="0.0"/>
+                                                                <gradient:SfGradientStop Color="#7244ad"  Offset="1.0"/>
+                                                            </gradient:SfLinearGradientBrush.GradientStops>
+                                                        </gradient:SfLinearGradientBrush>
+                                                    </gradient:SfGradientView.BackgroundBrush>
+                                                </gradient:SfGradientView>
+                                                <StackLayout Margin="16,20" >
+                                                    <StackLayout HorizontalOptions="StartAndExpand"
                                                  Padding="0,30,0,0" >
-                                        <Label x:Name="bodyText"  
-                                               Text="{Binding ShortDetails}" 
-                                               TextColor="{StaticResource whiteColor}"/>
-                                    </StackLayout>
-                                </Frame>
-                                <Frame BackgroundColor="{StaticResource lightestBlueColor}"
+                                                        <Label x:Name="bodyText"  
+                                                            Text="{Binding ShortDetails}" 
+                                                             TextColor="{StaticResource whiteColor}"/>
+                                                    </StackLayout>
+                                                    <StackLayout VerticalOptions="EndAndExpand" HeightRequest="50" Spacing="0" Padding="0,10">
+                                                    
+                                                        <Label VerticalOptions="EndAndExpand" Text="{Binding PubDate,StringFormat='Published on the {0:dd MMMM yyyy} '}"
+                                                               FontSize="12" FontFamily="{StaticResource Montserrat-Medium}" 
+                                                   LineHeight="{OnPlatform Default=-1, Android=1.5}"
+                                                               TextColor="{DynamicResource Gray-White}"/>
+                                                    </StackLayout>
+                                                 
+                                                </StackLayout>
+                                            </Grid>
+                                        </StackLayout>
+                                    </Frame>
+                                    <Frame BackgroundColor="{StaticResource lightestBlueColor}"
                                        CornerRadius="20" Padding="0" HasShadow="True" 
                                    AbsoluteLayout.LayoutBounds="0,0,1,50"  
                                        AbsoluteLayout.LayoutFlags="WidthProportional"
                                        HeightRequest="10" TabIndex="1"  >
-                                    <StackLayout Orientation="Horizontal"> 
-                                        <Label Text="{Binding Title}" VerticalTextAlignment="Center"
+                                        <Grid>
+                                            <gradient:SfGradientView>
+                                                <gradient:SfGradientView.BackgroundBrush>
+                                                    <gradient:SfLinearGradientBrush>
+                                                        <gradient:SfLinearGradientBrush.GradientStops>
+                                                            <gradient:SfGradientStop Color="{StaticResource pinkColor}" Offset="0.0"/>
+                                                            <gradient:SfGradientStop  Color="#d56381"  Offset="1.0"/>
+                                                        </gradient:SfLinearGradientBrush.GradientStops>
+                                                    </gradient:SfLinearGradientBrush>
+                                                </gradient:SfGradientView.BackgroundBrush>
+                                            </gradient:SfGradientView>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="{Binding Title}" VerticalTextAlignment="Center"
                                                HorizontalOptions="CenterAndExpand"
                                                TextColor="{StaticResource whiteColor}" 
                                                FontAttributes="Bold" 
                                                HorizontalTextAlignment="Center"/>
-                                        <ImageButton BackgroundColor="Transparent"
+                                                <ImageButton BackgroundColor="Transparent"
                                                      HorizontalOptions="End" Margin="0,0,20,0" 
                                                      Source="Edit_pencil.png"/>
-                                    </StackLayout>
-                                </Frame>
-                            </AbsoluteLayout>
+                                            </StackLayout>
+                                        </Grid>
+                                    </Frame>
+                                </AbsoluteLayout>
                             <ViewCell.ContextActions>
                                 <MenuItem x:Name="btnDelete" Text="Delete" IsDestructive="True"  
                                           Clicked="BtnDelete_Clicked"
@@ -73,14 +134,28 @@
             </StackLayout>
         </StackLayout>
         <Frame CornerRadius="100" HasShadow="True" AbsoluteLayout.LayoutBounds="1,1,70,70" 
-               Margin="0,0,10,10"
+               Margin="0,0,10,10" Padding="0"
                AbsoluteLayout.LayoutFlags="PositionProportional" 
                BackgroundColor="{StaticResource BlueColor}">
-            <ImageButton Source="Edit_pencil.png" Aspect="Fill" 
+            <AbsoluteLayout>
+                <gradient:SfGradientView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                    <gradient:SfGradientView.BackgroundBrush>
+                        <gradient:SfLinearGradientBrush>
+                            <gradient:SfLinearGradientBrush.GradientStops>
+                                <gradient:SfGradientStop Color="{StaticResource pinkColor}" Offset="0.0"/>
+                                <gradient:SfGradientStop  Color="#d56381"  Offset="1.0"/>
+                            </gradient:SfLinearGradientBrush.GradientStops>
+                        </gradient:SfLinearGradientBrush>
+                    </gradient:SfGradientView.BackgroundBrush>
+                </gradient:SfGradientView>
+
+                <ImageButton AbsoluteLayout.LayoutBounds="0.5,0.5,0.5,0.5" AbsoluteLayout.LayoutFlags="All"  Source="Edit_pencil.png" Aspect="Fill" 
                          Command="{Binding AddCommand}"
+                         
                          BackgroundColor="Transparent"   
                          x:Name="btnFloatNewNote"
                 />
+            </AbsoluteLayout>
         </Frame>
         
     </AbsoluteLayout>

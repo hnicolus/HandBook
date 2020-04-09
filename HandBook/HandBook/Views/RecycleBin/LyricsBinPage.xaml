@@ -1,6 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:HandBook.Controls"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              x:Class="HandBook.Views.RecycleBin.LyricsBinPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="titleLayout" Spacing="0">
+                <controls:TitleView Title="Recycled">
 
+                    <controls:TitleView.TrailingView>
+                        <buttons:SfButton
+                            Command="{TemplateBinding BindingContext.DeleteAllCommand}"
+                            CornerRadius="4"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource Delete}" />
+                    </controls:TitleView.TrailingView>
+                </controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+    <ListView x:Name="lyricsList"
+              ItemsSource="{Binding Lyrics}"
+              ItemTapped="NotesList_ItemTapped" >
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding Title}" 
+                          CommandParameter="{Binding .}" >
+
+                    <TextCell.ContextActions>
+                        <MenuItem Text="Delete Permanently All" 
+                                  Command="{Binding DeleteCommand}"
+                                  CommandParameter="{Binding .}"
+                                 />
+                    </TextCell.ContextActions>
+
+                </TextCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>

@@ -2,8 +2,36 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HandBook.Views.RecycleBin.RecycleHomePage"
-            Title="Recycle Bin" 
-            xmlns:local="clr-namespace:HandBook.Views.RecycleBin">
-    <local:NoteBinPage Title="Notes Bin"/>
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            xmlns:RecycleBin="clr-namespace:HandBook.Views.RecycleBin" 
+            android:TabbedPage.ToolbarPlacement="Bottom"
+             android:TabbedPage.BarSelectedItemColor="{DynamicResource PrimaryColor}"
+             android:TabbedPage.BarItemColor="{DynamicResource Gray-600}"
+             BarBackgroundColor="White"
+             NavigationPage.HasNavigationBar="False">
     
+    <TabbedPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </TabbedPage.Resources>
+
+    <RecycleBin:NoteBinPage Title="Notes">
+        <RecycleBin:NoteBinPage.IconImageSource>
+            <FontImageSource FontFamily="{StaticResource FontIcons}"
+                                 Glyph="{StaticResource EditIcon}"
+                                 Size="16"/>
+        </RecycleBin:NoteBinPage.IconImageSource>
+    </RecycleBin:NoteBinPage>
+
+    <RecycleBin:LyricsBinPage Title="Lyrics">
+        <RecycleBin:LyricsBinPage.IconImageSource>
+            <FontImageSource FontFamily="{StaticResource FontIcons}"
+                                 Glyph="{StaticResource ListIcon}"
+                                 Size="16"/>
+        </RecycleBin:LyricsBinPage.IconImageSource>
+    </RecycleBin:LyricsBinPage>
+
 </TabbedPage>

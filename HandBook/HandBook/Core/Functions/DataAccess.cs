@@ -15,13 +15,12 @@ namespace HandBook.Core.Functions
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
             {
-              
                 conn.CreateTable<Note>();
                 var note = conn.Table<Note>().Where(b => b.Id == id).SingleOrDefault();
-
                 return note;
             }
         }
+  
         public static List<Note> LoadNotes()
         {
             List<Note> notes;
@@ -30,8 +29,9 @@ namespace HandBook.Core.Functions
             {
                 conn.CreateTable<Note>();
                 notes = conn.Table<Note>().ToList();
+                return notes;
             }
-            return notes;
+            
         }
 
         //Updates an item in Database
@@ -47,7 +47,6 @@ namespace HandBook.Core.Functions
             }
         }
 
-
         public static bool Delete(Note item)
         {
             var note = item;
@@ -59,7 +58,6 @@ namespace HandBook.Core.Functions
                 int rows = conn.Delete(note);
                 return (rows < totalCount);
             }
-
         }
 
         public static bool Save(Note note)
@@ -90,6 +88,15 @@ namespace HandBook.Core.Functions
             }
         }
 
+        public static Lyric GetLyricById(int id)
+        {
+            using(SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+            {
+                conn.CreateTable<Lyric>();
+                var lyric = conn.Table<Lyric>().SingleOrDefault(i => i.Id == id);
+                return lyric;
+            }
+        }
         public static List<Lyric> LoadLyrics()
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))

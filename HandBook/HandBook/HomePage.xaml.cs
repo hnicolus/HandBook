@@ -17,14 +17,18 @@ namespace HandBook
 	{
 		public HomePage()
 		{
+			
 			InitializeComponent();
+			BackgroundColor = Color.WhiteSmoke;
+			BarBackgroundColor = Color.White;
+			BarTextColor = Color.Black;
+
 		}
 
 		private async void BtnBin_Clicked(object sender, EventArgs e)
 		{
 
 			await Navigation.PushAsync(new RecycleHomePage());
-
 		}
 
 		private async void btnAbout_Clicked(object sender, EventArgs e)

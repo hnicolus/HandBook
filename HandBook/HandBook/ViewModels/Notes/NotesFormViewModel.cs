@@ -1,8 +1,11 @@
-﻿using HandBook.Core.Functions;
+﻿using Amporis.Xamarin.Forms.ColorPicker;
+using HandBook.Core.Functions;
 using HandBook.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace HandBook.ViewModels.Notes
@@ -10,8 +13,8 @@ namespace HandBook.ViewModels.Notes
     public class NotesFormViewModel :BaseViewModel
     {
         #region Fields
-        bool _editing;
         Page page = Application.Current.MainPage;
+        App app = Application.Current as App;
         Note _note;
         #endregion
 
@@ -46,29 +49,89 @@ namespace HandBook.ViewModels.Notes
             }
         }
         #endregion
+        public Color EditorBackgroundColor { get => app.EditorBackgroundColor;
+            private set
+            {
+                if (app.EditorBackgroundColor == value)
+                    return;
+                app.EditorBackgroundColor = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         #region Commands
         public Command SaveCommand { get; set; }
+        public Command DeleteCommand { get; set; }
+        public Command BackButtonCommand { get; set; }
+        public Command EditorSettingsCommand { get; set; }
+        public Command BackgroundColorCommand { get; set; }
         #endregion
 
         #region Constructors
         public NotesFormViewModel()
         {
             _note = new Note();
-            _editing = false;
-            SaveCommand = new Command(OnSaveButtonClick);
+
+            InitialiseCommands();
         }
         public NotesFormViewModel(int id)
         {
-            _editing = true;
             _note = DataAccess.GetNoteById(id);
-            SaveCommand = new Command(OnSaveButtonClick);
-
+            InitialiseCommands();
         }
 
         #endregion
 
         #region Methods
+        private void InitialiseCommands()
+        {
+            SaveCommand = new Command(OnSaveButtonClick);
+            DeleteCommand = new Command(async it => await OnDeleteButtonClicked(it as Note));
+            BackButtonCommand = new Command(OnBackButtonClicked);
+            EditorSettingsCommand = new Command(OnEditorSettingsClicked);
+            BackgroundColorCommand = new Command<StackLayout>(async lay => await SetBackgroundColor(lay));
+
+        }
+        private async Task OnDeleteButtonClicked(Note item)
+        {
+            var response = await page.DisplayAlert("Warning", "Are you sure you want to Recycle this Note", "Yes", "No");
+            if (response)
+            {
+               
+                var notes = DataAccess.LoadNotes();
+                var note = notes.SingleOrDefault(b => b.Id == item.Id);
+                if (note != null)
+                {
+                    item.IsDeleted = true;
+                    DataAccess.Update(item);
+                    await page.Navigation.PopAsync();
+                    await page.Navigation.PopAsync();
+                }
+                else
+                {
+                    await page.Navigation.PopAsync();
+                };
+            }
+        }
+
+        private void OnEditorSettingsClicked(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private async void OnBackButtonClicked(object obj)
+        {
+            await page.Navigation.PopAsync();
+        }
+
+        public async Task SetBackgroundColor(StackLayout layout)
+        {
+            var app = Application.Current as App;
+
+            EditorBackgroundColor = await ColorPickerDialog.Show(layout, "ColorPickerDialog", Color.White, null);
+            await app.SavePropertiesAsync();
+        }
+
         async void  OnSaveButtonClick()
         {
       
@@ -86,9 +149,8 @@ namespace HandBook.ViewModels.Notes
             }
             else
             {
-                
-                var notesList = DataAccess.LoadNotes();
-                if (notesList.Contains(_note))
+                var notes = DataAccess.LoadNotes();
+                if (notes.Contains(_note))
                 {
                     var isUpdated = DataAccess.Update(_note);
                     if (isUpdated)

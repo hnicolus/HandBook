@@ -1,5 +1,6 @@
 ﻿using HandBook.Core.Functions;
 using HandBook.Models;
+using HandBook.Views.Notes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -56,6 +57,7 @@ namespace HandBook.ViewModels
         #endregion
 
         #region Commands
+        public Command BackButtonCommand { get; set; }
         public Command   ReadCommand{ get; set; }
         public Command DeleteCommand { get; set; }
         public Command ShareTextCommand { get; set; }
@@ -71,22 +73,33 @@ namespace HandBook.ViewModels
             FetchList();
 
             Note = DataAccess.GetNoteById(id);
+            InstantiateCommands();
 
+        }
+
+
+        #endregion
+
+        #region Methods
+        void InstantiateCommands()
+        {
+            BackButtonCommand = new Command(OnBackButtonClicked);
             ReadCommand = new Command(OnSpeakClick);
             DeleteCommand = new Command(OnDeleteButtonClicked);
             ShareTextCommand = new Command(OnShareButtonClicked);
             SaveToFileCommand = new Command(OnSaveToFileButtonClicked);
             CopyAllCommand = new Command(OnCopyAllButtonClicked);
             EditCommand = new Command(OnEditButtonClicked);
-
         }
-        #endregion
-
-        #region Methods
+        private async void OnBackButtonClicked(object obj)
+        {
+            var app = App.Current.MainPage;
+            await app.Navigation.PopAsync();
+        }
         private async void OnEditButtonClicked(object obj)
         {
             var app = App.Current.MainPage;
-            await app.Navigation.PushAsync(new NewNotesPage(Note.Id));
+            await app.Navigation.PushAsync(new NotesFormPage(Note.Id));
         }
         private async void OnCopyAllButtonClicked(object obj)
         {
@@ -95,10 +108,10 @@ namespace HandBook.ViewModels
         }
         private void OnSaveToFileButtonClicked(object obj)
         {
-            //var name = note.Title + ".txt";
-            //var content = $"Title : {note.Title} \n Date : {note.PubDate} \n {note.Body}";
-            //string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), name);
-            //File.WriteAllText(fileName, content);
+            var name = note.Title + ".txt";
+            var content = $"Title : {note.Title} \n Date : {note.PubDate} \n {note.Body}";
+            string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), name);
+            File.WriteAllText(fileName, content);
         }
         private async void OnShareButtonClicked(object obj)
         {
@@ -111,6 +124,7 @@ namespace HandBook.ViewModels
            await SpeakNow();
 
         }
+        //Delete Note on Delete Button clicked
         private async void OnDeleteButtonClicked(object obj)
         {
             var app = App.Current.MainPage;
@@ -120,7 +134,7 @@ namespace HandBook.ViewModels
             if (response)
             {
                 Note.IsDeleted = true;
-                //var deleted = DataAccess.Delete(note);
+                DataAccess.Update(note);
                 if (Note.IsDeleted)
                 {
                     await app.DisplayAlert("Success", "Notes have been successfully Deleted", "Ok");
@@ -155,7 +169,7 @@ namespace HandBook.ViewModels
 
             if(Note != null)
             {
-                await TextToSpeech.SpeakAsync(Note.Title+ " " + Note.Body, settings,cancelToken: canceTokenS.Token);
+                await TextToSpeech.SpeakAsync(Note.Title+ "." + Note.Body +".", settings,cancelToken: canceTokenS.Token);
             }
         }
         // Cancel speech if a cancellation token exists & hasn't been already requested.

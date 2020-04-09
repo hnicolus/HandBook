@@ -30,8 +30,6 @@ namespace HandBook
             Refresh();
         }
 
-
-        //Fetch  all items with is deleted flg set to false
         private void Refresh()
         {
             ctx = null;
@@ -39,13 +37,10 @@ namespace HandBook
             BindingContext = ctx;  
         }
 
-        //Selected Item
         private void NotesList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             notesList.SelectedItem = null;
         }
-
-        //Delete an item
         private async  void BtnDelete_Clicked(object sender, EventArgs e)
         {
             var menuItem = sender as MenuItem;

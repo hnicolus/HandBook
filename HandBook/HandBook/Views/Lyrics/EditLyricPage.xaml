@@ -4,8 +4,8 @@
                         xmlns:admob="clr-namespace:HandBook.Views.Admob"
              x:Class="HandBook.EditLyricPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="btnDelete" Text="Delete" Clicked="BtnDelete_Clicked"/>
-        <ToolbarItem Text="Save"  x:Name="btnUpdate" Clicked="BtnUpdate_Clicked"/>
+        <ToolbarItem x:Name="btnDelete" Command="{Binding DeletCommand}" Text="Delete" />
+        <ToolbarItem Text="Save"  x:Name="btnUpdate" Command="{Binding SaveCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid RowSpacing="0" >
@@ -13,7 +13,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <ScrollView>
+            <ScrollView BindingContext="{Binding Lyric}">
 
             <StackLayout BackgroundColor="{StaticResource lightBlueColor}">
                 <Frame>

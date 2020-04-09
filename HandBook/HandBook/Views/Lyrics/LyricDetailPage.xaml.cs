@@ -6,60 +6,32 @@ using HandBook.ViewModels;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using HandBook.ViewModels.Lyrics;
 
 namespace HandBook
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LyricDetailPage : ContentPage
     {
-        private Lyric _lyric;
-        private  LyricsViewModel _context;
+        private int id;
+        private LyricDetailViewModel _context;
         public LyricDetailPage(Lyric selectedLyric)
         {
             InitializeComponent();
 
-            _lyric = selectedLyric;
-            _context = new LyricsViewModel()
-            {
-                Lyric = selectedLyric
-            };
-           
-            BindingContext = _context.Lyric;
+            id = selectedLyric.Id;
+            LoadContent();
+
         }
 
-        private async void BtnDelete_Clicked(object sender, EventArgs e)
+        void LoadContent()
         {
-
-            var response = await DisplayAlert("Warning", "Are you sure you want to Delete this?", "Yes", "No");
-
-            if (response)
-            {
-                var deleted = DataAccess.Delete(_context.Lyric);
-                
-                    if (!deleted)
-                    {
-                        await DisplayAlert("Success", "Lyrics have been successfully Deleted", "Ok");
-                    }
-                    else
-                    {
-                        await DisplayAlert("Failed", "Lyrics have Failed to be Deleted", "Ok");
-                    };
-
-                    await Navigation.PopAsync();
-            }
-
+            _context = new LyricDetailViewModel(id);
+            BindingContext = _context;
         }
-
-         private async void BtnEdit_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new EditLyricPage(_context.Lyric));
-        }
-
         protected override void OnAppearing()
         {
-       
-            _context.FetchList();
-            BindingContext = _context.Lyrics.SingleOrDefault( b => b.Id == _lyric.Id);
+            LoadContent();
             base.OnAppearing();
 
         }

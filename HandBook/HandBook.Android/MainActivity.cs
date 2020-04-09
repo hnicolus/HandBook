@@ -35,6 +35,8 @@ namespace HandBook.Droid
             string FullPath = Path.Combine(folderfPath, dbName);
             LoadApplication(new App(FullPath));
             Window.SetSoftInputMode(Android.Views.SoftInput.AdjustResize);
+            this.Window.AddFlags(WindowManagerFlags.Fullscreen);
+            this.Window.AddFlags(WindowManagerFlags.KeepScreenOn);
 
         }
 
@@ -44,5 +46,6 @@ namespace HandBook.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
     }
 }

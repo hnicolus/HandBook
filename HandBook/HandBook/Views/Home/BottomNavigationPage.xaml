@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:HandBook.Views.Home"
+             x:Class="HandBook.Views.Home.BottomNavigationPage"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            xmlns:Home="clr-namespace:HandBook"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+             android:TabbedPage.BarSelectedItemColor="{DynamicResource PrimaryColor}"
+             android:TabbedPage.BarItemColor="{DynamicResource Gray-600}"
+             BarBackgroundColor="White"
+             NavigationPage.HasNavigationBar="False">
+    <TabbedPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </TabbedPage.Resources>
+    <Home:PersonalNotePage Title="Notes">
+        <Home:PersonalNotePage.IconImageSource>
+            <FontImageSource FontFamily="{StaticResource FontIcons}"
+                                 Glyph="{StaticResource EditIcon}"
+                                 Size="16"/>
+        </Home:PersonalNotePage.IconImageSource>
+    </Home:PersonalNotePage>
+    <Home:LyricsPage Title="Lyrics">
+        <Home:LyricsPage.IconImageSource>
+            <FontImageSource FontFamily="{StaticResource FontIcons}"
+                                 Glyph="{StaticResource ListIcon}"
+                                 Size="16"/>
+        </Home:LyricsPage.IconImageSource>
+    </Home:LyricsPage>
+    <local:SettingsPage Title="Utilities">
+        <local:SettingsPage.IconImageSource>
+            <FontImageSource FontFamily="{StaticResource FontIcons}"
+                                 Glyph="{StaticResource SettingsIcon}"
+                                 Size="16"/>
+        </local:SettingsPage.IconImageSource>
+    </local:SettingsPage>
+</TabbedPage>

@@ -155,6 +155,9 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Amporis.Xamarin.Forms.ColorPicker">
+      <Version>1.0.23</Version>
+    </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.6.292</Version>
     </PackageReference>
@@ -164,8 +167,20 @@
     <PackageReference Include="Syncfusion.Xamarin.Buttons">
       <Version>17.4.0.53</Version>
     </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.Cards">
+      <Version>17.4.0.53</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.Core">
+      <Version>17.4.0.53</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.DataSource">
+      <Version>17.4.0.55</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar">
       <Version>17.4.0.55</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfListView">
+      <Version>17.4.0.53</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfRichTextEditor">
       <Version>17.4.0.53</Version>
@@ -199,5 +214,11 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ViewMode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Card.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Visa.png" />
   </ItemGroup>
 </Project>

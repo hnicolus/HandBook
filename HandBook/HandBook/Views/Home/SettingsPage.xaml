@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:viewModel="clr-namespace:HandBook.ViewModels.Home"
+             x:Class="HandBook.Views.Home.SettingsPage" 
+             BackgroundColor="{DynamicResource Gray-White}"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <viewModel:SettingsViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+      <ScrollView>
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                  FontFamily="{StaticResource Montserrat-Medium}"
+                  FontSize="16"
+                  Margin="0,4,0,0"
+                  HeightRequest="45"  
+                  VerticalTextAlignment="Center"
+                  HorizontalOptions="CenterAndExpand"
+                  LineHeight="{OnPlatform Android=1.5,
+                                            Default=-1}"
+                  Text="Utilities"
+                  TextColor="{DynamicResource Gray-900}"
+                  VerticalOptions="Center" />
+                <BoxView Grid.Row="1" Style="{StaticResource BoxViewStyle}" />
+
+                <Label Grid.Row="2" Style="{StaticResource SettingsLabelStyle}"
+                       
+                       Text="Settings">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding EditorSettingsCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Style="{StaticResource SettingsIconStyle}" Grid.Row="2">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding EditorSettingsCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <BoxView Style="{StaticResource BoxViewStyle}" Grid.Row="3"/>
+                <Label Padding="0" BackgroundColor="Transparent" Style="{StaticResource SettingsLabelStyle}" Text="Recycle Bin" Grid.Row="4">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RecycleBinCommand }"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Style="{StaticResource SettingsIconStyle}" Grid.Row="4">
+            <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RecycleBinCommand }"/>
+            </Label.GestureRecognizers>
+          </Label>
+          <BoxView Style="{StaticResource BoxViewStyle}" Grid.Row="5"/>
+            <Label Style="{StaticResource SettingsLabelStyle}" Text="Share App" Grid.Row="6">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ShareAppCommand }"/>
+                </Label.GestureRecognizers>
+            </Label>
+            
+          <BoxView Style="{StaticResource BoxViewStyle}" Grid.Row="7"/>
+                <Label Style="{StaticResource SettingsLabelStyle}" Text="Get more Apps" Grid.Row="8">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GetMoreAppsCommand }"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            <BoxView Style="{StaticResource BoxViewStyle}" Grid.Row="9"/>
+                <Label Style="{StaticResource SettingsLabelStyle}" Text="About Us" Grid.Row="10">
+                <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AboutUsCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+            </Grid>
+      </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

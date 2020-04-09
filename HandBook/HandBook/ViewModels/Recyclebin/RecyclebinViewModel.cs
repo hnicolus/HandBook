@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace HandBook.ViewModels.Recyclebin
@@ -29,32 +30,54 @@ namespace HandBook.ViewModels.Recyclebin
         #endregion
 
         #region Commands
-        public Command ItemCommand { get; set; }
+        public Command ItemTappedCommand { get; set; }
+        public Command DeleteAllCommand { get; set; }
+        public Command BackButtonCommand { get; set; }
         public Command DeleteCommand { get; set; }
         #endregion
 
         #region Constructors
         public RecyclebinViewModel()
         {
-            ItemCommand = new Command(OnItemSelected);
+            ItemTappedCommand = new Command(async n => await OnItemTapped(n as Note));
             DeleteCommand = new Command(OnDeleteButtonClicked);
+            DeleteAllCommand = new Command(OnDeleteAllButtonClicked);
+            BackButtonCommand = new Command(OnBackButtonClicked);
             LoadNotes();
-        }
-
-        private void OnItemSelected(object obj)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion
 
         #region Methods
-
-       public void LoadNotes()
+        private async void OnBackButtonClicked(object obj) => await App.Current.MainPage.Navigation.PopAsync();
+        private async void OnDeleteAllButtonClicked(object obj)
         {
-            Notes = DataAccess.LoadNotes().Where(b =>b.IsDeleted == true).ToList();
+            var page = App.Current.MainPage;
+            var response = await page.DisplayAlert("Warning", "Clearing the Notes Recycle Bin will" +
+                                                    "delete all the items " +
+                                                    ",Are you sure you want to " +
+                                                    "permanently delete all the recycled " +
+                                                    "notes?", "Yes", "Cancel");
+            if (response)
+            {
+                foreach (Note n in Notes)
+                {
+                    DataAccess.Delete(n);
+                }
+            }
+            LoadNotes();
+        }
+        private async Task OnItemTapped(Note note)
+        {
+            var page = App.Current.MainPage;
+            var response = await page.DisplayAlert("Alert", "Do you want to Restore Selected File ?", "Yes", "No");
+            if (!response) return;
+                note.IsDeleted = false;
+                DataAccess.Update(note);
+                LoadNotes();
         }
 
+        public void LoadNotes()=> Notes = DataAccess.LoadNotes().Where(b => b.IsDeleted == true).ToList();
         async void OnDeleteButtonClicked(object obj)
         {
             var app = App.Current.MainPage;
@@ -83,26 +106,7 @@ namespace HandBook.ViewModels.Recyclebin
 
                 }
             }
-            //try
-            //{
-            //    var item = obj as Note;
-            //    if (item is Note)
-            //    {
-            //       var isDeleted= DataAccess.Delete(item);
-            //        if (isDeleted)
-            //        {
-            //           await app.DisplayAlert("Success", "Item Deleted", "Ok");
-            //        }
-            //        return;
-            //    }
-            //    else
-            //    {
-            //       await app.DisplayAlert("Failed", "Falied to delete item", "Ok");
-            //    }
-            //}catch(Exception ex)
-            //{
-            //   await app.DisplayAlert("Error", $"Report -{ex.Message}", "Ok");
-            //}
+
             LoadNotes();
         }
         #endregion

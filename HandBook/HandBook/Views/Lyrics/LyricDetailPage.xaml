@@ -2,20 +2,76 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:admob="clr-namespace:HandBook.Views.Admob"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:controls="clr-namespace:HandBook.Controls"
+             NavigationPage.HasNavigationBar="False"
              x:Class="HandBook.LyricDetailPage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text=" Mark as Favourite " x:Name="btnFavourite" Order="Secondary" Clicked="BtnFavourite_Clicked"/>
-        <ToolbarItem Text="Copy All" x:Name="btnCoppyAll" Order="Secondary" Clicked="btnCoppyAll_Clicked"/>
-        <ToolbarItem x:Name="btnDelete" Text="Delete" Clicked="BtnDelete_Clicked"/>
-        <ToolbarItem Text="Edit"  x:Name="btnEdit" Clicked="BtnEdit_Clicked"/>
-    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout Spacing="0">
+
+                <!--  Title View  -->
+                <controls:TitleView Title="Settings" BackgroundColor="{DynamicResource Gray-White} ">
+                    <controls:TitleView.LeadingView>
+                        <buttons:SfButton
+                            x:Name="backButton"
+                            Command="{TemplateBinding BindingContext.BackButtonCommand}"
+                            CommandParameter="{x:Reference backButton}"
+                            CornerRadius="4"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource Back}" />
+                    </controls:TitleView.LeadingView>
+                    <controls:TitleView.Content>
+                        <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
+                            <buttons:SfButton
+                            Command="{TemplateBinding BindingContext.EditCommand}"
+                            CornerRadius="4"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource Edit}" />
+                            <buttons:SfButton
+                            Command="{TemplateBinding BindingContext.SpeakCommand}"
+                            CornerRadius="4"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource Audio}" />
+                            <buttons:SfButton
+                            Command="{TemplateBinding BindingContext.DeleteCommand}"
+                            CornerRadius="4"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource Delete}" />
+
+                            <buttons:SfButton
+                            Command="{TemplateBinding BindingContext.SaveToFileCommand}"
+                            CornerRadius="4"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource Attach}" />
+                        </StackLayout>
+                    </controls:TitleView.Content>
+                    <controls:TitleView.TrailingView>
+                        <buttons:SfButton
+                            Command="{TemplateBinding BindingContext.ShareCommand}"
+                            CornerRadius="4"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource Share}" />
+                    </controls:TitleView.TrailingView>
+                </controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="6*"></RowDefinition>
             </Grid.RowDefinitions>
-            <ScrollView>
+            <ScrollView BindingContext="{Binding Lyric}">
 
             <StackLayout Grid.Row="0" Padding="10">
                 <StackLayout>

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:admob="clr-namespace:HandBook.Views.Admob"
+             xmlns:controls="clr-namespace:HandBook.Controls"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
+             x:Class="HandBook.Views.Notes.NotesFormPage" >
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout Spacing="0">
+                <!--  Title View  -->
+                <controls:TitleView Title="Settings" BackgroundColor="{DynamicResource Gray-White} ">
+                    <controls:TitleView.LeadingView>
+                        <buttons:SfButton
+                            x:Name="backButton"
+                            Command="{TemplateBinding BindingContext.BackButtonCommand}"
+                            CommandParameter="{x:Reference backButton}"
+                            CornerRadius="4"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource Back}" />
+                    </controls:TitleView.LeadingView>
+                    <controls:TitleView.Content>
+                        <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
+                            <buttons:SfButton
+                            Command="{TemplateBinding  BindingContext.SaveCommand}"
+                            CornerRadius="4"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource SaveIcon}" />
+                            <buttons:SfButton
+                            Command="{TemplateBinding BindingContext.DeleteCommand}"
+                                CommandParameter="{TemplateBinding BindingContext.Note}"
+                            CornerRadius="4"
+                            x:Name="DeleteItem"
+               
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource Delete}" />
+
+                        </StackLayout>
+                    </controls:TitleView.Content>
+                    <controls:TitleView.TrailingView>
+                        <buttons:SfButton
+                            Command="{TemplateBinding BindingContext.EditorSettingsCommand}"
+                            CornerRadius="4"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource SettingsIcon}" />
+                    </controls:TitleView.TrailingView>
+                </controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding SaveCommand}" />
+        <ToolbarItem Text="Background" Order="Secondary"
+                     Clicked="ToolbarItem_Clicked_1"
+                     Command="{Binding BackgroundColorCommand}" />
+    </ContentPage.ToolbarItems>
+   
+    <AbsoluteLayout>
+        <StackLayout x:Name="rootx" Spacing="0" AbsoluteLayout.LayoutFlags="All" 
+                     BindingContext="{Binding Note}"
+                     AbsoluteLayout.LayoutBounds="0,0,1,1">
+
+            <Frame HasShadow="True" CornerRadius="20"
+                   x:Name="titleEntry" Margin="10" BackgroundColor="{Binding EditorBackgroundColor}"
+                   Padding="10">
+                <StackLayout Orientation="Horizontal" >
+                    <Label Text="Title :" FontAttributes="Bold" FontSize="Large" VerticalTextAlignment="Center"/>
+                    <Entry x:Name="txtTitle" Text="{Binding Title}" VerticalOptions="FillAndExpand"
+                           HorizontalOptions="FillAndExpand" MaxLength="30"   />
+                </StackLayout>
+            </Frame>
+
+            <Frame  CornerRadius="20" Margin="10" x:Name="bodyEditor" BackgroundColor="{Binding EditorBackgroundColor}"
+                    VerticalOptions="FillAndExpand" Padding="10">
+                <Editor x:Name="txtNewNote" Text="{Binding Body}"
+                        Placeholder="Body goes here" 
+                          VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            </Frame>
+            <admob:AdmobView HeightRequest="50" BackgroundColor="Transparent"/>
+        </StackLayout>
+
+    </AbsoluteLayout>
+</ContentPage>

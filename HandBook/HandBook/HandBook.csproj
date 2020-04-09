@@ -10,32 +10,37 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Data\navigation.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Data\navigation.json" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Amporis.Xamarin.Forms.ColorPicker" Version="1.0.23" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
-    <PackageReference Include="Syncfusion.Licensing" Version="17.4.0.53" />
-    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.4.0.53" />
-    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="17.4.0.53" />
-    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.4.0.53" />
-    <PackageReference Include="Syncfusion.Xamarin.SfRichTextEditor" Version="17.4.0.53" />
-    <PackageReference Include="Syncfusion.Xamarin.SfRotator" Version="17.4.0.53" />
-    <PackageReference Include="Syncfusion.Xamarin.SfSchedule" Version="17.4.0.53" />
+    <PackageReference Include="Syncfusion.Licensing" Version="17.4.0.55" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.4.0.55" />
+    <PackageReference Include="Syncfusion.Xamarin.Cards" Version="17.4.0.55" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="17.4.0.55" />
+    <PackageReference Include="Syncfusion.Xamarin.DataSource" Version="17.4.0.55" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="17.4.0.55" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.4.0.55" />
+    <PackageReference Include="Syncfusion.Xamarin.SfRichTextEditor" Version="17.4.0.55" />
+    <PackageReference Include="Syncfusion.Xamarin.SfRotator" Version="17.4.0.55" />
+    <PackageReference Include="Syncfusion.Xamarin.SfSchedule" Version="17.4.0.55" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.1" />
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.356" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\EditorSettings\EditorSettingsPage.xaml.cs">
+      <DependentUpon>EditorSettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Lyrics\LyricsPage.xaml.cs">
       <DependentUpon>LyricsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Lyrics\Styles.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
     <Compile Update="Views\Notes\PersonalNotePage.xaml.cs">
       <DependentUpon>PersonalNotePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\RecycleBin\Styles.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -43,10 +48,31 @@
     <EmbeddedResource Update="Themes\LightTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\NotesList\DocumentsListPage.xaml">
+    <EmbeddedResource Update="Views\EditorSettings\EditorSettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\NotesList\Styles.xaml">
+    <EmbeddedResource Update="Views\EditorSettings\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Home\BottomNavigationPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Home\SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Home\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Lyrics\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Notes\MyCardsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Notes\NotesFormPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Notes\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\RecycleBin\LyricsBinPage.xaml">
@@ -57,6 +83,9 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Views\RecycleBin\RecycleHomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\RecycleBin\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Settings\AboutPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -86,9 +115,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\WalkThrough\IntroductionPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Notes\NewNotesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Notes\NoteDetailPage.xaml">

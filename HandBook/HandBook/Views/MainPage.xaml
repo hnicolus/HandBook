@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:HandBook"
-             x:Class="HandBook.MainPage">
+             x:Class="HandBook.MainPage" BackgroundColor="{StaticResource whiteColor}">
     <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
         <Label Text="Main Page"></Label>
         <Button Text="Home" BackgroundColor="DodgerBlue" />

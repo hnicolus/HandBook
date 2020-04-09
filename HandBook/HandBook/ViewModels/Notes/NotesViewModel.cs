@@ -10,6 +10,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using HandBook.Views.Notes;
 
 namespace HandBook.ViewModels
 {
@@ -57,7 +58,7 @@ namespace HandBook.ViewModels
 
         private async void AddNewNote(object obj)
         {
-            await page.Navigation.PushAsync(new NewNotesPage());
+            await page.Navigation.PushAsync(new NotesFormPage());
         }
 
         public void TappedItem(Note note)

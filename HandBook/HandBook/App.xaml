@@ -2,10 +2,14 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"   
        
+             xmlns:themes = "clr-namespace:HandBook.Themes;assembly=HandBook"
              x:Class="HandBook.App">
     <Application.Resources>
 
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <themes:LightTheme />
+            </ResourceDictionary.MergedDictionaries >
            
             <Color x:Key="pinkColor">#db0494</Color>
             <Color x:Key="BlueColor" >#072A62</Color>
