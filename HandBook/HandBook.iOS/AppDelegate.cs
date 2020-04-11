@@ -34,6 +34,7 @@ namespace HandBook.iOS
             // Syncfusion.SfSchedule.XForms.iOS.SfScheduleRenderer.Init();
             //Syncfusion.XForms.iOS.RichTextEditor.SfRichTextEditorRenderer.Init();
             global::Xamarin.Forms.Forms.Init();
+            Core.Init();
             SfCardViewRenderer.Init();
             SfListViewRenderer.Init();
             SfBorderRenderer.Init();

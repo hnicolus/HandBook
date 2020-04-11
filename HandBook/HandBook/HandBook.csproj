@@ -11,6 +11,9 @@
 
   <ItemGroup>
     <PackageReference Include="Amporis.Xamarin.Forms.ColorPicker" Version="1.0.23" />
+    <PackageReference Include="SkiaSharp.Extended" Version="1.60.0" />
+    <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.1.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="Syncfusion.Licensing" Version="17.4.0.55" />
     <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.4.0.55" />
