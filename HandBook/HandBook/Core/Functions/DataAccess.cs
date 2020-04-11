@@ -34,7 +34,7 @@ namespace HandBook.Core.Functions
             
         }
 
-        //Updates an item in Database
+        //Updates Note in Database
         public static bool Update(Note note)
         {
             Note selectedNote = note;
@@ -46,7 +46,7 @@ namespace HandBook.Core.Functions
                 return (rows > 0);
             }
         }
-
+        //Delete Note in Database
         public static bool Delete(Note item)
         {
             var note = item;
@@ -60,6 +60,7 @@ namespace HandBook.Core.Functions
             }
         }
 
+        //Save Note in Database
         public static bool Save(Note note)
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
@@ -72,7 +73,7 @@ namespace HandBook.Core.Functions
         }
         #endregion
 
-#region Lyrics  CRUD Code Block
+        #region Lyrics  CRUD Code Block
 
 
 #pragma warning disable 1998

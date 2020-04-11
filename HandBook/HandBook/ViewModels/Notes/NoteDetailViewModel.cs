@@ -76,8 +76,6 @@ namespace HandBook.ViewModels
             InstantiateCommands();
 
         }
-
-
         #endregion
 
         #region Methods
@@ -130,7 +128,6 @@ namespace HandBook.ViewModels
             var app = App.Current.MainPage;
             var response = await app.DisplayAlert("Warning", "Are you sure you want to Delete this note", "Yes", "No");
 
-
             if (response)
             {
                 Note.IsDeleted = true;
@@ -172,6 +169,7 @@ namespace HandBook.ViewModels
                 await TextToSpeech.SpeakAsync(Note.Title+ "." + Note.Body +".", settings,cancelToken: canceTokenS.Token);
             }
         }
+
         // Cancel speech if a cancellation token exists & hasn't been already requested.
         public void CancelSpeech()
         {

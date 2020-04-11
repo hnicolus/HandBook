@@ -10,7 +10,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <themes:LightTheme />
             </ResourceDictionary.MergedDictionaries >
-           
+   
+            
             <Color x:Key="pinkColor">#db0494</Color>
             <Color x:Key="BlueColor" >#072A62</Color>
             <Color x:Key="greyColor" >#6F7492</Color>
@@ -18,42 +19,6 @@
         
             <Color x:Key="lightestBlueColor">#1CACFF</Color>
             <Color x:Key="lightBlueColor">#1C8EFF</Color>
-
-            <!--<Style x:Key="LabelStyle" TargetType="Label">
-                <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="HorizontalTextAlignment" Value="Center"/>
-                <Setter Property="LineHeight" Value="{OnPlatform Android=1.25,Default=-1}"/>
-                <Setter Property="TextColor" Value="{DynamicResource Gray-White}"/>
-            </Style>
-
-            --><!--Common button style--><!--
-            <Style x:Key="SfButtonStyle" TargetType="buttons:SfButton">
-                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
-                <Setter Property="VerticalOptions" Value="EndAndExpand"/>
-                <Setter Property="Margin" Value="0,10,0,24"/>
-                <Setter Property="CornerRadius" Value="20"/>
-                <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="WidthRequest" Value="245"/>
-                <Setter Property="HeightRequest" Value="40"/>
-                <Setter Property="FontFamily" Value="{StaticResource Montserrat-SemiBold}"/>
-                <Setter Property="BackgroundColor" Value="{StaticResource Gray-White}"/>
-                <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}"/>
-            </Style>
-
-            <Style x:Key="SfGradientViewStyle" TargetType="gradient:SfGradientView">
-                <Setter Property="BackgroundBrush">
-                    <Setter.Value>
-                        <gradient:SfLinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <gradient:SfLinearGradientBrush.GradientStops>
-                                <gradient:SfGradientStop Color="#072A62" Offset="0.0" />
-                                <gradient:SfGradientStop Color="#1CACFF" Offset="1.0" />
-                            </gradient:SfLinearGradientBrush.GradientStops>
-                        </gradient:SfLinearGradientBrush>
-                    </Setter.Value>
-                </Setter>
-            </Style>-->
-            
-            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

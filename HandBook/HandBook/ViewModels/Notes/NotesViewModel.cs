@@ -56,6 +56,18 @@ namespace HandBook.ViewModels
             this.pageService = pageService;
         }
 
+
+        public NotesViewModel(int id)
+        {
+            FetchList();
+            Note = notes.SingleOrDefault(n => n.Id == id);
+        }
+        #endregion
+
+
+        #region Methods
+        public void FetchList() =>
+    Notes = DataAccess.LoadNotes().Where(b => b.IsDeleted == false).ToList();
         private async void AddNewNote(object obj)
         {
             await page.Navigation.PushAsync(new NotesFormPage());
@@ -66,11 +78,11 @@ namespace HandBook.ViewModels
             if (note == null)
                 return;
             page.Navigation.PushAsync(new NoteDetailPage(note.Id));
-          
+
         }
         public async Task OnDeleteButtonClicked(Note note)
         {
- 
+
             var response = await page.DisplayAlert("Warning", "Are you sure you want to delete this item ?", "Yes", "No");
             if (response)
             {
@@ -80,7 +92,7 @@ namespace HandBook.ViewModels
                 if (note.IsDeleted)
                 {
                     await page.DisplayAlert("Success", "Notes have been successfully Deleted", "Ok");
-                 
+
                 }
                 else
                 {
@@ -90,25 +102,15 @@ namespace HandBook.ViewModels
             }
         }
 
-        public NotesViewModel(int id)
+        public bool TableExists
         {
-            FetchList();
-            Note = notes.SingleOrDefault(n => n.Id == id);
+            get
+            {
+                return (Notes.Count <= 0);
+            }
         }
         #endregion
 
-        //fetch Data from database
-        public void FetchList()=>
-            Notes = DataAccess.LoadNotes().Where(b => b.IsDeleted == false).ToList();
-        
-        public bool TableExists
-        { 
-            get 
-            {
-                return (Notes.Count <= 0);
-            } 
-        }
 
-  
     }
 }
