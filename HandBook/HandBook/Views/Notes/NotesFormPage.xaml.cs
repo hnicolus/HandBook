@@ -1,4 +1,5 @@
 ﻿using Amporis.Xamarin.Forms.ColorPicker;
+using HandBook.ViewModels;
 using HandBook.ViewModels.Notes;
 using System;
 using Xamarin.Forms;
@@ -22,7 +23,7 @@ namespace HandBook.Views.Notes
 
             InitializeComponent();
             SetBackground();
-            viewModel = new NotesFormViewModel();
+            viewModel = new NotesFormViewModel(new PageService());
             BindingContext = viewModel;
         }
 
@@ -32,7 +33,7 @@ namespace HandBook.Views.Notes
 
             InitializeComponent();
             SetBackground();
-            viewModel = new NotesFormViewModel(id);
+            viewModel = new NotesFormViewModel(new PageService(),id);
             BindingContext = viewModel;
         }
 

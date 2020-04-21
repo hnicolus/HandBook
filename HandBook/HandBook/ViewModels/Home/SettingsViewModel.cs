@@ -15,9 +15,10 @@ namespace HandBook.ViewModels.Home
     [Preserve(AllMembers = true)]
     public class SettingsViewModel
     {
-        private Page page = Application.Current.MainPage;
+        private IPageService page;
         public SettingsViewModel()
         {
+            page = new PageService();
             this.EditorSettingsCommand = new Command(this.EditorSettingsTapped);
             this.RecycleBinCommand = new Command(this.RecycleBinTapped);
             this.ShareAppCommand = new Command(this.ShareAppTapped);
@@ -40,11 +41,13 @@ namespace HandBook.ViewModels.Home
 
         private async void EditorSettingsTapped(object obj)
         {
-            await App.Current.MainPage.Navigation.PushAsync(new EditorSettingsPage());
+            //await App.Current.MainPage.Navigation.PushAsync(new EditorSettingsPage());
+            await Application.Current.MainPage.DisplayAlert("Alert", "Oops , This section is still being developed and not" +
+                " yet ready for preview", "Ok");
         }
         private async void RecycleBinTapped(object obj)
         {
-            await App.Current.MainPage.Navigation.PushAsync(new RecycleHomePage());
+            await Application.Current.MainPage.Navigation.PushAsync(new RecycleHomePage());
         }
         private async void ShareAppTapped(object obj)
         {
@@ -53,12 +56,12 @@ namespace HandBook.ViewModels.Home
         }
         private async void TermsAndConditionsTapped(object obj)
         {
-            await App.Current.MainPage.Navigation.PushAsync(new TermsPage());
+            await Application.Current.MainPage.Navigation.PushAsync(new TermsPage());
         }
 
         private async void AboutUsTapped(object obj)
         {
-            await App.Current.MainPage.Navigation.PushAsync(new AboutPage());
+            await Application.Current.MainPage.Navigation.PushAsync(new AboutPage());
         }
 
         private async void GetMoreAppsTapped(object obj)

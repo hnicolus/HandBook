@@ -15,18 +15,18 @@
     <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.1.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
-    <PackageReference Include="Syncfusion.Licensing" Version="17.4.0.55" />
-    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.4.0.55" />
-    <PackageReference Include="Syncfusion.Xamarin.Cards" Version="17.4.0.55" />
-    <PackageReference Include="Syncfusion.Xamarin.Core" Version="17.4.0.55" />
-    <PackageReference Include="Syncfusion.Xamarin.DataSource" Version="17.4.0.55" />
-    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="17.4.0.55" />
-    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="17.4.0.55" />
-    <PackageReference Include="Syncfusion.Xamarin.SfRichTextEditor" Version="17.4.0.55" />
-    <PackageReference Include="Syncfusion.Xamarin.SfRotator" Version="17.4.0.55" />
-    <PackageReference Include="Syncfusion.Xamarin.SfSchedule" Version="17.4.0.55" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.1" />
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.356" />
+    <PackageReference Include="Syncfusion.Licensing" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.Cards" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.DataSource" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.SfRichTextEditor" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.SfRotator" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.SfSchedule" Version="18.1.0.43" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.617" />
   </ItemGroup>
 
   <ItemGroup>

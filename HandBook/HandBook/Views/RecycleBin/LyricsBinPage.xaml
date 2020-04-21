@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:HandBook.Controls"
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:admob="clr-namespace:HandBook.Views.Admob"
              x:Class="HandBook.Views.RecycleBin.LyricsBinPage">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -28,23 +29,23 @@
             </StackLayout>
         </ControlTemplate>
     </ContentPage.ControlTemplate>
-    <ListView x:Name="lyricsList"
+    <AbsoluteLayout>
+        <ListView x:Name="lyricsList" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
               ItemsSource="{Binding Lyrics}"
               ItemTapped="NotesList_ItemTapped" >
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <TextCell Text="{Binding Title}" 
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Title}" 
                           CommandParameter="{Binding .}" >
-
-                    <TextCell.ContextActions>
-                        <MenuItem Text="Delete Permanently All" 
+                        <TextCell.ContextActions>
+                            <MenuItem Text="Delete Permanently" 
                                   Command="{Binding DeleteCommand}"
-                                  CommandParameter="{Binding .}"
-                                 />
-                    </TextCell.ContextActions>
-
-                </TextCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+                                  CommandParameter="{Binding .}"/>
+                        </TextCell.ContextActions>
+                    </TextCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <admob:AdmobView  BackgroundColor="Transparent"  AbsoluteLayout.LayoutBounds="0,570,400,50" />
+    </AbsoluteLayout>
 </ContentPage>

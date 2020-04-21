@@ -16,6 +16,7 @@ namespace HandBook.ViewModels.Notes
         Page page = Application.Current.MainPage;
         App app = Application.Current as App;
         Note _note;
+        private readonly IPageService _pageService;
         #endregion
 
         #region Properties
@@ -68,16 +69,18 @@ namespace HandBook.ViewModels.Notes
         #endregion
 
         #region Constructors
-        public NotesFormViewModel()
+        public NotesFormViewModel(IPageService pageService)
         {
             _note = new Note();
 
             InitialiseCommands();
+            _pageService = pageService;
         }
-        public NotesFormViewModel(int id)
+        public NotesFormViewModel(IPageService pageService, int id)
         {
             _note = DataAccess.GetNoteById(id);
             InitialiseCommands();
+            _pageService = pageService;
         }
 
         #endregion
@@ -94,22 +97,29 @@ namespace HandBook.ViewModels.Notes
         }
         private async Task OnDeleteButtonClicked(Note item)
         {
-            var response = await page.DisplayAlert("Warning", "Are you sure you want to Recycle this Note", "Yes", "No");
+            bool response = false;
+            if(string.IsNullOrEmpty(Note.Title) || string.IsNullOrEmpty(Note.Body))
+            {
+                 response = await page.DisplayAlert("Warning", "Are you sure you want to discard and exit the note creator", "Yes", "No");
+            }
+            else
+            {
+                response = await page.DisplayAlert("Warning", "Are you sure you want to Recycle this Note", "Yes", "No");
+            }
             if (response)
             {
                
-                var notes = DataAccess.LoadNotes();
-                var note = notes.SingleOrDefault(b => b.Id == item.Id);
+                var note = DataAccess.GetNoteById(item.Id);
                 if (note != null)
                 {
                     item.IsDeleted = true;
                     DataAccess.Update(item);
-                    await page.Navigation.PopAsync();
-                    await page.Navigation.PopAsync();
+                    await _pageService.PopAsync();
+                    await _pageService.PopAsync();
                 }
                 else
                 {
-                    await page.Navigation.PopAsync();
+                    await _pageService.PopAsync();
                 };
             }
         }
@@ -121,7 +131,7 @@ namespace HandBook.ViewModels.Notes
 
         private async void OnBackButtonClicked(object obj)
         {
-            await page.Navigation.PopAsync();
+            await _pageService.PopAsync();
         }
 
         public async Task SetBackgroundColor(StackLayout layout)
@@ -136,41 +146,55 @@ namespace HandBook.ViewModels.Notes
         {
       
             //Save 
-            if (_note.Id> 0)
+            if(_note.Title == null)
             {
-                var isUpdated = DataAccess.Update(_note);
-
-                if (isUpdated)
-                {
-                    await page.DisplayAlert("Success", "Notes have been successfully Updated", "Ok");
-                }
-                else
-                    await page.DisplayAlert("Failed", "Notes Failed to be Updated", "Ok");
+               await _pageService.DisplayAlert("Error", "Title cannot be left empty!", "Ok");
             }
             else
             {
-                var notes = DataAccess.LoadNotes();
-                if (notes.Contains(_note))
+                if (_note.Id > 0)
                 {
                     var isUpdated = DataAccess.Update(_note);
+
                     if (isUpdated)
-                        await page.DisplayAlert("Success", "Notes have been successfully Updated", "Ok");
+                    {
+                        await _pageService.DisplayAlert("Success", "Notes have been successfully Updated", "Ok");
+                    }
                     else
-                        await page.DisplayAlert("Failed", "Notes Failed to be Updated", "Ok");
+                        await _pageService.DisplayAlert("Failed", "Notes Failed to be Updated", "Ok");
                 }
                 else
                 {
-                    var saved = DataAccess.Save(_note);
-                    if (saved)
+                    var notes = DataAccess.LoadNotes();
+                    if (notes.Contains(_note))
                     {
-                        await page.DisplayAlert("Success", "Notes have been successfully Saved", "Ok");
-
+                        var isUpdated = DataAccess.Update(_note);
+                        if (isUpdated)
+                            await _pageService.DisplayAlert("Success", "Notes have been successfully Updated", "Ok");
+                        else
+                            await _pageService.DisplayAlert("Failed", "Notes Failed to be Updated", "Ok");
                     }
                     else
-                        await page.DisplayAlert("Failed", "Notes Failed to be save", "Ok");
-                }
+                    {
+                        Random rnd = new Random();
+                        var startGradient = Color.FromRgb(rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255));
+                        var EndGradient = Color.FromRgb(rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255));
 
+                        _note.BackgroundGradientStart = startGradient.ToHex();
+                        _note.BackgroundGradientEnd = EndGradient.ToHex();
+                        var saved = DataAccess.Save(_note);
+                        if (saved)
+                        {
+                            await _pageService.DisplayAlert("Success", "Notes have been successfully Saved", "Ok");
+
+                        }
+                        else
+                            await _pageService.DisplayAlert("Failed", "Notes Failed to be save", "Ok");
+                    }
+
+                }
             }
+
         }
         #endregion
     }

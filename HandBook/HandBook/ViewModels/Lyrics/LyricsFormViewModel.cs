@@ -1,8 +1,6 @@
 ﻿using HandBook.Core.Functions;
 using HandBook.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -13,6 +11,7 @@ namespace HandBook.ViewModels.Lyrics
 
         #region Fields
         private Lyric _lyric;
+        private readonly IPageService _page;
         #endregion
 
         #region Properties
@@ -31,21 +30,26 @@ namespace HandBook.ViewModels.Lyrics
 
         #region Commands
         public ICommand DeletCommand { get; set; }
-        public  ICommand SaveCommand { get; set; }
+        public ICommand EditorSettingsCommand { get; set; }
+
+        public ICommand BackButtonCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
 
         #endregion
 
         #region Constructors
-        public LyricsFormViewModel()
+        public LyricsFormViewModel(IPageService page)
         {
             Lyric = new Lyric();
             InstantiateCommands();
+            _page = page;
         }
 
-        public LyricsFormViewModel(int id)
+        public LyricsFormViewModel(int id, IPageService page)
         {
             InstantiateCommands();
             Lyric = DataAccess.GetLyricById(id);
+            _page = page;
         }
         #endregion
 
@@ -53,54 +57,69 @@ namespace HandBook.ViewModels.Lyrics
 
         void InstantiateCommands()
         {
+            EditorSettingsCommand = new Command(OnEditorButtonClicked);
+            BackButtonCommand = new Command(OnBackButtonClicked);
             DeletCommand = new Command(DeleteLyric);
             SaveCommand = new Command(SaveLyric);
         }
 
+        private void OnEditorButtonClicked(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnBackButtonClicked(object obj) => Application.Current.MainPage.Navigation.PopAsync();
         private async void SaveLyric(object obj)
         {
-            var page = App.Current.MainPage;
+    
             //Save 
-            if (Lyric.Id > 0)
+            if(string.IsNullOrEmpty(Lyric.Title))
             {
-                var isUpdated = DataAccess.Update(Lyric);
-
-                if (isUpdated)
-                {
-                    await App.Current.MainPage.DisplayAlert("Success", "Notes have been successfully Updated", "Ok");
-                }
-                else
-                    await App.Current.MainPage.DisplayAlert("Failed", "Notes Failed to be Updated", "Ok");
+               await _page.DisplayAlert("Error", "Title cannot be empty", "Ok");
             }
             else
             {
-
-                var notesList = DataAccess.LoadLyrics();
-                if (notesList.Contains(Lyric))
+                if (Lyric.Id > 0)
                 {
                     var isUpdated = DataAccess.Update(Lyric);
+
                     if (isUpdated)
-                        await page.DisplayAlert("Success", "Notes have been successfully Updated", "Ok");
+                    {
+                        await _page.DisplayAlert("Success", "Notes have been successfully Updated", "Ok");
+                    }
                     else
-                        await page.DisplayAlert("Failed", "Notes Failed to be Updated", "Ok");
+                        await _page.DisplayAlert("Failed", "Notes Failed to be Updated", "Ok");
                 }
                 else
                 {
-                    var saved = await DataAccess.SaveAsync(Lyric);
-                    if (saved)
-                    {
-                        await page.DisplayAlert("Success", "Notes have been successfully Saved", "Ok");
 
+                    var notesList = DataAccess.LoadLyrics();
+                    if (notesList.Contains(Lyric))
+                    {
+                        var isUpdated = DataAccess.Update(Lyric);
+                        if (isUpdated)
+                            await _page.DisplayAlert("Success", "Notes have been successfully Updated", "Ok");
+                        else
+                            await _page.DisplayAlert("Failed", "Notes Failed to be Updated", "Ok");
                     }
                     else
-                        await page.DisplayAlert("Failed", "Notes Failed to be save", "Ok");
+                    {
+                        var saved = await DataAccess.SaveAsync(Lyric);
+                        if (saved)
+                        {
+                            await _page.DisplayAlert("Success", "Notes have been successfully Saved", "Ok");
+
+                        }
+                        else
+                            await _page.DisplayAlert("Failed", "Notes Failed to be save", "Ok");
+                    }
                 }
             }
+       
         }
         private async void DeleteLyric(object obj)
         {
-            var page = App.Current.MainPage;
-            var response = await page.DisplayAlert("Warning", "Are you sure you want to Delete this?", "Yes", "No");
+            var response = await _page.DisplayAlert("Warning", "Are you sure you want to Delete this?", "Yes", "No");
 
             if (response)
             {
@@ -110,20 +129,20 @@ namespace HandBook.ViewModels.Lyrics
 
                 if (deleted)
                 {
-                    await page.DisplayAlert("Success", "Lyrics have been successfully Deleted", "Ok");
+                    await _page.DisplayAlert("Success", "Lyrics have been successfully Deleted", "Ok");
                 }
                 else
                 {
-                    await page.DisplayAlert("Failed", "Lyrics have Failed to be Deleted", "Ok");
+                    await _page.DisplayAlert("Failed", "Lyrics have Failed to be Deleted", "Ok");
                 };
 
             }
             else
             {
-                var continueEdit = await page.DisplayAlert("Notice", "Do you want to Continue Editing ", "Yes", "No");
+                var continueEdit = await _page.DisplayAlert("Notice", "Do you want to Continue Editing ", "Yes", "No");
                 if (continueEdit != true)
                 {
-                    await page.Navigation.PopAsync();
+                    await _page.PopAsync();
                 }
             }
         }

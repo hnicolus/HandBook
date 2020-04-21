@@ -20,14 +20,14 @@ namespace HandBook
 		public EditLyricPage ( Lyric selectedLyric)
 		{
 			InitializeComponent ();
-			_context = new LyricsFormViewModel(selectedLyric.Id);
+			_context = new LyricsFormViewModel(selectedLyric.Id,new PageService());
 			BindingContext = _context;
 		}
 
 		public EditLyricPage()
 		{
 			InitializeComponent();
-			_context = new LyricsFormViewModel();
+			_context = new LyricsFormViewModel(new PageService());
 			BindingContext = _context;
 		}
 

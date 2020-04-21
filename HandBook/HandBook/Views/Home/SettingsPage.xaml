@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              xmlns:viewModel="clr-namespace:HandBook.ViewModels.Home"
+             xmlns:admob="clr-namespace:HandBook.Views.Admob"
              x:Class="HandBook.Views.Home.SettingsPage" 
              BackgroundColor="{DynamicResource Gray-White}"
              NavigationPage.HasNavigationBar="False">
@@ -36,7 +36,9 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-          </Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
                 <Label Grid.Row="0"
                   FontFamily="{StaticResource Montserrat-Medium}"
                   FontSize="16"
@@ -94,8 +96,11 @@
                         <TapGestureRecognizer Command="{Binding AboutUsCommand}"/>
                 </Label.GestureRecognizers>
             </Label>
-
+                <BoxView Style="{StaticResource BoxViewStyle}" Grid.Row="11"/>
+                <admob:AdmobView  Grid.Row="12"
+             BackgroundColor="Transparent" HeightRequest="50"/>
             </Grid>
+          
       </ScrollView>
     </ContentPage.Content>
 </ContentPage>

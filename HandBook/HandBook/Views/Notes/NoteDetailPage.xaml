@@ -88,28 +88,25 @@
     <AbsoluteLayout >
 
         <ScrollView Grid.Row="0" Padding="0" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
-            <StackLayout Padding="0" Spacing="0"  VerticalOptions="FillAndExpand" BindingContext="{Binding Note}"  >
-                <Frame HasShadow="False"  Padding="0,20,0,20" BackgroundColor="Transparent"
-                       CornerRadius="0" VerticalOptions="FillAndExpand">
-                    <StackLayout VerticalOptions="StartAndExpand">
-               
-                        <StackLayout Orientation="Vertical" Padding="10,0,10,10">
+            <StackLayout Padding="0" Spacing="0" HeightRequest="800"  VerticalOptions="FillAndExpand" BindingContext="{Binding Note}"  >
+
+                <StackLayout VerticalOptions="StartAndExpand">
+                    
+                    <StackLayout Orientation="Vertical" Padding="10,0,10,10">
                             <Label Text="{Binding Title}" VerticalOptions="FillAndExpand"
                                    HorizontalOptions="FillAndExpand"
                                    VerticalTextAlignment="Center"  FontSize="Large"  />
                             <Label Text="{Binding PubDate, StringFormat='{0:dd MMMM yyyy}'}" />
                         </StackLayout>
-                        <StackLayout Padding="10,0,10,10">
-                            
-                            <Label Text="{Binding Body}" 
-                                   VerticalOptions="FillAndExpand"
-                                   HorizontalOptions="FillAndExpand"/>
+                    
+                    <StackLayout Padding="10,0,10,10" VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding Body}" />
                         </StackLayout>
                     </StackLayout>
-                
-                </Frame>
-                <admob:AdmobView HeightRequest="50" BackgroundColor="Transparent"/>
+                    
             </StackLayout>
         </ScrollView>
+        <admob:AdmobView  AbsoluteLayout.LayoutBounds="0,1,1,0.1" AbsoluteLayout.LayoutFlags="All"
+             BackgroundColor="Transparent"/>
     </AbsoluteLayout>
 </ContentPage>

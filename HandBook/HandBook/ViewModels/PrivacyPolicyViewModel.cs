@@ -9,17 +9,10 @@ namespace HandBook.ViewModels
 
     class PrivacyPolicyViewModel
     {
-
-
-  
         public List<AppInformation> AppPolicies { get; set; }
-
-
+ 
         public PrivacyPolicyViewModel()
         {
-
-          
-
             AppPolicies = new List<AppInformation>
             {
                 new AppInformation
@@ -88,8 +81,6 @@ namespace HandBook.ViewModels
                     Body = "If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at nicolusmaluleke@gmail.com." +
                     " "
                 }
-
-
             };
         }
     }

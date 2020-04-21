@@ -7,7 +7,13 @@ namespace HandBook.Core
 {
     public static class Constants
     {
+        #region Fields
+        private const string SYNCFUSION_LICENSE = "MjQyNDk5QDMxMzgyZTMxMmUzMEh0OXBvek96eUtGMlFJQm0wOU9uUElYNVVTdGhYMlZRRDh5M3crMFV5dVE9";
+        public static string SFLicenseKey { get => SYNCFUSION_LICENSE;}
+        private static int _adCounter;
+        #endregion
 
+        #region Properties
         public static string AppId
         {
             get
@@ -64,8 +70,8 @@ namespace HandBook.Core
                 return false;
             }
         }
+        #endregion 
 
-        private static int _adCounter;
 
 
     }

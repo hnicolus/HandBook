@@ -16,9 +16,11 @@ namespace HandBook.ViewModels
 {
     public class NoteDetailViewModel :BaseViewModel
     {
+        #region Fields
         private Note note;
         private List<Note> _notes;
         private CancellationTokenSource canceTokenS;
+        #endregion
 
         #region Properties
         public Note Note

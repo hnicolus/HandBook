@@ -2,7 +2,61 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                         xmlns:admob="clr-namespace:HandBook.Views.Admob"
+             xmlns:controls="clr-namespace:HandBook.Controls"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             BackgroundColor="White"  NavigationPage.HasNavigationBar="False"
              x:Class="HandBook.EditLyricPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout Spacing="0">
+                <!--  Title View  -->
+                <controls:TitleView Title="Settings" BackgroundColor="{DynamicResource Gray-White} ">
+                    <controls:TitleView.LeadingView>
+                        <buttons:SfButton
+                            x:Name="backButton"
+                            Command="{TemplateBinding BindingContext.BackButtonCommand}"
+                            CommandParameter="{x:Reference backButton}"
+                            CornerRadius="4"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource Back}" />
+                    </controls:TitleView.LeadingView>
+                    <controls:TitleView.Content>
+                        <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
+                            <buttons:SfButton
+                            Command="{TemplateBinding  BindingContext.SaveCommand}"
+                            CornerRadius="4"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource SaveIcon}" />
+                            <buttons:SfButton
+                            Command="{TemplateBinding BindingContext.DeleteCommand}"
+                                CommandParameter="{TemplateBinding BindingContext.Note}"
+                            CornerRadius="4"
+                            x:Name="DeleteItem"
+               
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource Delete}" />
+
+                        </StackLayout>
+                    </controls:TitleView.Content>
+                    <controls:TitleView.TrailingView>
+                        <buttons:SfButton
+                            Command="{TemplateBinding BindingContext.EditorSettingsCommand}"
+                            CornerRadius="4"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource SettingsIcon}" />
+                    </controls:TitleView.TrailingView>
+                </controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="btnDelete" Command="{Binding DeletCommand}" Text="Delete" />
         <ToolbarItem Text="Save"  x:Name="btnUpdate" Command="{Binding SaveCommand}" />
@@ -15,7 +69,7 @@
             </Grid.RowDefinitions>
             <ScrollView BindingContext="{Binding Lyric}">
 
-            <StackLayout BackgroundColor="{StaticResource lightBlueColor}">
+            <StackLayout BackgroundColor="{StaticResource  whiteColor}" Padding="5">
                 <Frame>
                     <StackLayout   >
                         <Label Text="Title" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start"/>

@@ -17,6 +17,8 @@
     <x:String x:Key="Delete">&#xe716;</x:String>
     <x:String x:Key="Share">&#xe704;</x:String>
     <x:String x:Key="Attach">&#xe71e;</x:String>
+    <x:String x:Key="SaveIcon">&#xe730;</x:String>
+    <x:String x:Key="SettingsIcon">&#xe72b;</x:String>
 
 
 

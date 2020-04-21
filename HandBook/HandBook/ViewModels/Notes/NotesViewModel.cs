@@ -41,6 +41,8 @@ namespace HandBook.ViewModels
 
         #region Commands
         public ICommand DeleteNoteCommand { get; private  set; }
+        public ICommand TappedItemCommand { get; set; }
+        public ICommand ShareItemCommand { get; set; }
         public Command AddCommand { get; set; }
         #endregion
 
@@ -50,36 +52,55 @@ namespace HandBook.ViewModels
         {
             notes = new List<Note>();
 
-            DeleteNoteCommand = new Command<Note>(async n => await OnDeleteButtonClicked(n as Note));
-            AddCommand = new Command(AddNewNote);
+            CreateCommandsInstances();
             FetchList();
             this.pageService = pageService;
         }
 
 
-        public NotesViewModel(int id)
+        public NotesViewModel(int id, PageService pageService)
         {
             FetchList();
             Note = notes.SingleOrDefault(n => n.Id == id);
+            this.pageService = pageService;
         }
         #endregion
 
-
         #region Methods
-        public void FetchList() =>
-    Notes = DataAccess.LoadNotes().Where(b => b.IsDeleted == false).ToList();
-        private async void AddNewNote(object obj)
+
+        //Instanciate Commands
+        private void CreateCommandsInstances()
         {
-            await page.Navigation.PushAsync(new NotesFormPage());
+            TappedItemCommand = new Command(async sd => await TappedItem(sd as Note));
+            DeleteNoteCommand = new Command<Note>(async n => await OnDeleteButtonClicked(n as Note));
+            AddCommand = new Command(AddNewNote);
+            ShareItemCommand =new Command( async sh => await ShareItem(sh as Note));
         }
 
-        public void TappedItem(Note note)
+        private async Task ShareItem(Note note)
+        {
+            var content = $"Title : {note.Title} \n Date : {note.PubDate} \n {note.Body}";
+            var shareText = new ShareExt();
+            await shareText.ShareText(content);
+        }
+
+        //Fetch Notes
+        public void FetchList() =>
+            Notes = DataAccess.LoadNotes().Where(b => b.IsDeleted == false).ToList();
+        
+        //Navigate to New Note Page
+        private async void AddNewNote(object obj)=> await page.Navigation.PushAsync(new NotesFormPage());
+        
+        //Navigate to Item detail page
+        public async Task TappedItem(Note note)
         {
             if (note == null)
                 return;
-            page.Navigation.PushAsync(new NoteDetailPage(note.Id));
+          await  page.Navigation.PushAsync(new NoteDetailPage(note.Id));
 
         }
+        
+        //Recycle item
         public async Task OnDeleteButtonClicked(Note note)
         {
 
@@ -101,7 +122,8 @@ namespace HandBook.ViewModels
                 FetchList();
             }
         }
-
+        
+        //Check if content exixst
         public bool TableExists
         {
             get

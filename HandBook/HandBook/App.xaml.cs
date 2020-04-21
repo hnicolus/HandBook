@@ -1,4 +1,5 @@
 
+using HandBook.Core;
 using HandBook.Views.Home;
 using HandBook.Views.Notes;
 using System;
@@ -10,20 +11,24 @@ namespace HandBook
 {
     public partial class App : Application
     {
-        public static string BaseImageUrl { get; } = "https://cdn.syncfusion.com/essential-ui-kit-for-xamarin.forms/common/uikitimages/";
-        private const string SYNCFUSION_LICENSE = "MjIzMDMxQDMxMzcyZTM0MmUzMG5jQTZrSE1PVlNWNGlaY0xmMWFKUHJyVlN5M0JrSE1vRkordHhOUHpkOGs9";
-        public static string DatabaseLocation = string.Empty;
 
+        #region Constants
+        public static string BaseImageUrl { get; } = "https://cdn.syncfusion.com/essential-ui-kit-for-xamarin.forms/common/uikitimages/";
+        #endregion
+
+        public static string DatabaseLocation = string.Empty;
 
         #region PropertyKeys
         private const string editorBackgroundColorKey = "EditorBackgroundColor";
         #endregion
+
+        #region Properties
         public Color EditorBackgroundColor
         {
             get
             {
                 if (Properties.ContainsKey(editorBackgroundColorKey))
-                    return (Color) Properties[editorBackgroundColorKey];
+                    return (Color)Properties[editorBackgroundColorKey];
                 return Color.WhiteSmoke;
             }
             set
@@ -31,10 +36,14 @@ namespace HandBook
                 Properties[editorBackgroundColorKey] = value;
             }
         }
+        #endregion
+
+
+        #region Constructors
         public App()
         {
             ActivateSyncFusion();
-           InitializeComponent();
+            InitializeComponent();
             MainPage = new NavigationPage(new BottomNavigationPage())
             {
                 BackgroundColor = Color.WhiteSmoke,
@@ -49,7 +58,7 @@ namespace HandBook
             ActivateSyncFusion();
             DatabaseLocation = databaseLocation;
             InitializeComponent();
-            MainPage = new NavigationPage(new BottomNavigationPage()) 
+            MainPage = new NavigationPage(new BottomNavigationPage())
             {
                 BackgroundColor = Color.WhiteSmoke,
                 BarBackgroundColor = Color.FromHex("#ff4a4a"),
@@ -57,6 +66,14 @@ namespace HandBook
 
             };
         }
+        #endregion
+
+
+        #region Methods
+
+        //Activate SF License                                  
+        void ActivateSyncFusion() => Syncfusion.Licensing.SyncfusionLicenseProvider
+                                    .RegisterLicense(Constants.SFLicenseKey);
         protected override void OnStart()
         {
             // Handle when your app starts
@@ -71,8 +88,9 @@ namespace HandBook
         {
             // Handle when your app resumes
         }
-        void ActivateSyncFusion() => Syncfusion.Licensing.SyncfusionLicenseProvider
-            .RegisterLicense(SYNCFUSION_LICENSE);
+
+
+        #endregion
 
 
     }

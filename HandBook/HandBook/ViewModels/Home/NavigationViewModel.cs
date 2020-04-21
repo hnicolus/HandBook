@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -7,7 +7,7 @@ using NavigationModel = HandBook.Models.Home.NavigationModel;
 namespace HandBook.ViewModels.Home
 {
     /// <summary>
-    /// ViewModel for the Navigation list with cards page.
+    /// ViewModel for the Navigation list with page.
     /// </summary>
     [Preserve(AllMembers = true)]
     [DataContract]

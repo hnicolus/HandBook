@@ -69,7 +69,9 @@ namespace HandBook.ViewModels.Lyrics
         {
             var name = Lyric.Title + ".txt";
             var content = $"Title : {Lyric.Title} \n Date : {Lyric.PubDate} \n{Lyric.Chorus}\n {Lyric.Verse}";
-            string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),"HandBookLyrics", name);
+            string fileName = Path.Combine(Environment
+                .GetFolderPath(Environment
+                .SpecialFolder.MyDocuments),"HandBookLyrics", name);
             File.WriteAllText(fileName, content);
         }
 

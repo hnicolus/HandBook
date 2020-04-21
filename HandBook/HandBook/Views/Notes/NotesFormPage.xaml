@@ -82,11 +82,12 @@
                 </StackLayout>
             </Frame>
 
-            <Frame  CornerRadius="20" Margin="10" x:Name="bodyEditor" BackgroundColor="{Binding EditorBackgroundColor}"
+            <Frame  CornerRadius="20" Margin="10" x:Name="bodyEditor" HeightRequest="800"   HorizontalOptions="FillAndExpand"
+                    BackgroundColor="{Binding EditorBackgroundColor}"
                     VerticalOptions="FillAndExpand" Padding="10">
                 <Editor x:Name="txtNewNote" Text="{Binding Body}"
-                        Placeholder="Body goes here" 
-                          VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                        Placeholder="Body goes here" VerticalOptions="FillAndExpand" 
+                         />
             </Frame>
             <admob:AdmobView HeightRequest="50" BackgroundColor="Transparent"/>
         </StackLayout>

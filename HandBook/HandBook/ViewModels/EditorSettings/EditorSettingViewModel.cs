@@ -31,7 +31,6 @@ namespace HandBook.ViewModels.EditorSettings
             this.PolicyCommand = new Command(this.PrivacyPolicyClicked);
             this.FAQCommand = new Command(this.FAQClicked);
         }
-
         #endregion
 
         #region Commands

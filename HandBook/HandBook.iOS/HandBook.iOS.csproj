@@ -171,39 +171,39 @@
       <Version>1.6.292</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Licensing">
-      <Version>17.4.0.55</Version>
+      <Version>18.1.0.43</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Buttons">
-      <Version>17.4.0.53</Version>
+      <Version>18.1.0.43</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Cards">
-      <Version>17.4.0.53</Version>
+      <Version>18.1.0.43</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Core">
-      <Version>17.4.0.53</Version>
+      <Version>18.1.0.43</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.DataSource">
-      <Version>17.4.0.55</Version>
+      <Version>18.1.0.43</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar">
-      <Version>17.4.0.55</Version>
+      <Version>18.1.0.43</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfListView">
-      <Version>17.4.0.53</Version>
+      <Version>18.1.0.43</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfRichTextEditor">
-      <Version>17.4.0.53</Version>
+      <Version>18.1.0.43</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfRotator">
-      <Version>17.4.0.53</Version>
+      <Version>18.1.0.43</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfSchedule">
-      <Version>17.4.0.55</Version>
+      <Version>18.1.0.43</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
-      <Version>1.5.1</Version>
+      <Version>1.5.2</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.356" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.617" />
     <PackageReference Include="Xamarin.Google.iOS.MobileAds">
       <Version>7.53.1</Version>
     </PackageReference>

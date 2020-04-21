@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace HandBook.ViewModels
 {
-    interface IPageService
+   public interface IPageService
     {
         Task PushAsync(Page page);
         Task<Page> PopAsync();

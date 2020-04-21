@@ -11,10 +11,8 @@ namespace HandBook.Models
 
         [MaxLength(30)]
         public string Genre { get; set; }
-
         public string Chorus {get;set;}
-        public string Verse { get; set; }
-
+        public string Verse { get; set; }   
         public string ShortDetails
         {
             get
